@@ -1,0 +1,263 @@
+[
+  {
+    "category": "python",
+    "title": "0.1 + 0.2 itu bukan 0.3",
+    "body": "Komputer menyimpan desimal dalam biner, jadi sebagian pecahan tidak bisa tepat.",
+    "example": "print(0.1 + 0.2)\nprint(0.1 + 0.2 == 0.3)",
+    "result": "0.30000000000000004\nFalse",
+    "why": "Seperti 1/3 yang tak berujung di desimal, 0.1 juga berulang tak berujung di biner.",
+    "howTo": [
+      "Untuk uang, pakai modul decimal",
+      "Tulis angka sebagai teks: Decimal(\"0.1\")",
+      "Bandingkan float dengan math.isclose"
+    ],
+    "usage": "Menghitung total di kasir atau invoice supaya tidak meleset."
+  },
+  {
+    "category": "python",
+    "title": "String di Python immutable",
+    "body": "Setelah string dibuat, kamu tidak bisa mengubah karakter di tengahnya.",
+    "example": "nama = \"Python\"\nnama[0] = \"J\"  # Ini akan error\nprint(nama)",
+    "result": "TypeError: 'str' object does not support item assignment",
+    "why": "Immutability membuat string aman untuk dibagi di antara thread dan di-cache dengan efisien.",
+    "howTo": [
+      "Buat string baru: nama = \"J\" + nama[1:]",
+      "Pakai list lalu join: chars = list(nama); chars[0] = \"J\"; nama = ''.join(chars)",
+      "Pakai replace untuk pola tertentu"
+    ],
+    "usage": "Menulis parser atau sanitizer yang aman tanpa takut data berubah tak terduga."
+  },
+  {
+    "category": "python",
+    "title": "List comprehension bisa pakai if-else",
+    "body": "Kamu bisa membuat list dengan kondisi yang lebih kompleks dalam satu baris.",
+    "example": "angka = [1, 2, 3, 4, 5]\nhasil = [\"genap\" if x % 2 == 0 else \"ganjil\" for x in angka]\nprint(hasil)",
+    "result": "['ganjil', 'genap', 'ganjil', 'genap', 'ganjil']",
+    "why": "Python mendukung ekspresi kondisional di dalam comprehension untuk membuat kode lebih ringkas.",
+    "howTo": [
+      "Tulis kondisi sebelum for jika hanya ingin filter",
+      "Pakai if-else setelah nilai jika ingin transformasi kondisional",
+      "Bisa nested comprehension untuk multi-dimensi"
+    ],
+    "usage": "Memproses data dalam satu baris saat membuat laporan atau transformasi sederhana."
+  },
+  {
+    "category": "toefl",
+    "title": "Affect vs Effect sering tertukar",
+    "body": "Affect adalah kata kerja, effect adalah kata benda.",
+    "example": "The weather can affect your mood.\nThe effect of the medicine was immediate.",
+    "result": "Cuaca dapat mempengaruhi suasana hati Anda.\nEfek obat itu langsung terasa.",
+    "why": "Kedua kata berasal dari bahasa Latin yang berbeda dan berkembang dengan fungsi gramatikal yang berbeda.",
+    "howTo": [
+      "Ingat: A untuk Action (affect = verb)",
+      "Ingat: E untuk End result (effect = noun)",
+      "Cek apakah butuh kata kerja atau kata benda dalam kalimat"
+    ],
+    "usage": "Menulis esai akademik atau laporan profesional tanpa membuat kesalahan dasar."
+  },
+  {
+    "category": "toefl",
+    "title": "Fewer untuk yang bisa dihitung, less untuk yang tidak",
+    "body": "Fewer digunakan dengan kata benda countable, less dengan uncountable.",
+    "example": "I have fewer books than you.\nWe need less water for this recipe.",
+    "result": "Saya punya lebih sedikit buku daripada kamu.\nKita butuh lebih sedikit air untuk resep ini.",
+    "why": "Aturan ini berasal dari tradisi grammar Inggris untuk membedakan kuantitas diskrit vs kontinu.",
+    "howTo": [
+      "Tanya: bisa dihitung satu per satu? Jika ya, pakai fewer",
+      "Untuk uang, waktu, jarak: biasanya pakai less (uncountable)",
+      "Di supermarket: '10 items or fewer' tanda yang benar"
+    ],
+    "usage": "Berbicara atau menulis dengan tepat saat membandingkan kuantitas dalam konteks akademik."
+  },
+  {
+    "category": "toefl",
+    "title": "Paraphrase penting untuk Reading section",
+    "body": "TOEFL sering menanyakan arti yang sama dengan kalimat berbeda.",
+    "example": "Original: The discovery revolutionized the field of medicine.\nParaphrase: The finding brought about major changes in medical science.",
+    "result": "Penemuan merevolusi bidang kedokteran.\nTemuan itu membawa perubahan besar dalam ilmu kedokteran.",
+    "why": "Tes ingin melihat apakah kamu paham inti ide, bukan hanya hapal kata per kata.",
+    "howTo": [
+      "Cari sinonim untuk kata kunci",
+      "Ubah struktur kalimat (active ke passive atau sebaliknya)",
+      "Gabungkan atau pecah kalimat"
+    ],
+    "usage": "Meningkatkan skor Reading dengan cepat menangkap makna tanpa terjebak wording."
+  },
+  {
+    "category": "design",
+    "title": "Rule of thirds untuk komposisi seimbang",
+    "body": "Bagi gambar menjadi 9 bagian sama dengan 2 garis horizontal dan 2 vertikal.",
+    "example": "Foto landscape: letakkan horizon di garis bawah 1/3, pohon di perpotongan kiri atas.",
+    "result": "Mata penonton langsung tertarik ke titik penting, gambar terasa dinamis bukan statis.",
+    "why": "Mata manusia secara alami tertarik ke titik perpotongan, bukan ke tengah.",
+    "howTo": [
+      "Aktifkan grid kamera atau software desain",
+      "Tempatkan elemen kunci di perpotongan garis",
+      "Gunakan garis untuk menuntun mata melintasi desain"
+    ],
+    "usage": "Membuat poster, foto produk, atau layout majalah yang lebih menarik secara visual.",
+    "quote": "'Komposisi adalah fondasi dari semua seni visual. Tanpa komposisi yang baik, elemen-elemen hanyalah kumpulan yang tidak berarti.' - Paul Rand (1985)"
+  },
+  {
+    "category": "design",
+    "title": "Kontras buat hierarki visual",
+    "body": "Perbedaan mencolok antara elemen membantu mata melihat mana yang penting dulu.",
+    "example": "Headline besar hitam, subhead kecil abu-abu, body text hitam tipis.",
+    "result": "Pembaca langsung tahu judul utama, lalu penjelasan, lalu detail.",
+    "why": "Otak memproses perbedaan lebih cepat daripada kemiripan.",
+    "howTo": [
+      "Buat ukuran font berbeda minimal 2x",
+      "Pakai warna kontras (gelap-terang atau complementary)",
+      "Tambahkan ruang kosong di sekitar elemen penting"
+    ],
+    "usage": "Desain presentasi, infografis, atau website yang mudah dipindai.",
+    "quote": "'Kontras adalah salah satu alat paling kuat dalam desain. Tanpa kontras, tidak ada yang menarik perhatian.' - Massimo Vignelli (1977)"
+  },
+  {
+    "category": "design",
+    "title": "Whitespace bukan ruang kosong yang sia-sia",
+    "body": "Ruang kosong di sekitar elemen membantu pernapasan visual dan fokus.",
+    "example": "Kartu nama dengan margin lebar, teks rapi di tengah, logo kecil di pojok.",
+    "result": "Kartu terasa premium, informasi mudah dibaca, tidak sesak.",
+    "why": "Mata butuh istirahat antara informasi, seperti paragraf dalam tulisan.",
+    "howTo": [
+      "Berikan margin minimal sama dengan tinggi huruf kecil (x-height)",
+      "Grup elemen terkait dengan whitespace yang lebih kecil di dalam",
+      "Pisahkan grup dengan whitespace yang lebih besar"
+    ],
+    "usage": "Membuat brosur, menu restoran, atau dokumen resmi yang profesional.",
+    "quote": "'White space is to be regarded as an active element, not a passive background.' - Jan Tschichold (1935)"
+  },
+  {
+    "category": "japanese",
+    "title": "は dibaca wa, bukan ha",
+    "body": "Partikel は (topik) selalu dibaca 'wa', meskipun hurufnya sama dengan ha hiragana.",
+    "example": "こんにちは\nKonnichiwa\n\n私{わたし}は学生{がくせい}です\nWatashi wa gakusei desu",
+    "result": "Halo (selamat siang).\nSaya adalah siswa/mahasiswa.",
+    "why": "Ini adalah pengecualian sejarah dalam bahasa Jepang yang sudah menjadi standar.",
+    "howTo": [
+      "Ingat: は sebagai partikel selalu wa",
+      "Sebagai huruf dalam kata, tetap ha (misal: はし hashi = jembatan)",
+      "Tidak ada aturan khusus, hafal saja pengecualian ini"
+    ],
+    "usage": "Membaca dan menulis kalimat dasar dengan partikel yang benar."
+  },
+  {
+    "category": "japanese",
+    "title": "います untuk hidup, あります untuk benda",
+    "body": "Kata kerja 'ada' berbeda untuk makhluk hidup dan benda mati.",
+    "example": "猫{ねこ}がいます\nNeko ga imasu\n\n本{ほん}があります\nHon ga arimasu",
+    "result": "Ada kucing.\nAda buku.",
+    "why": "Bahasa Jepang membedakan keberadaan berdasarkan kemampuan bergerak/hidup.",
+    "howTo": [
+      "Hewan, orang, serangga: pakai います (imasu)",
+      "Benda, tanaman, barang: pakai あります (arimasu)",
+      "Ingat: i untuk hidup, a untuk benda"
+    ],
+    "usage": "Menjelaskan apa yang ada di suatu tempat dengan tepat."
+  },
+  {
+    "category": "japanese",
+    "title": "こ、そ、あ、ど untuk penunjuk",
+    "body": "Sistem penunjuk 4 tingkat: dekat pembicara, dekat lawan bicara, jauh dari keduanya, tanya.",
+    "example": "これ (kore) = ini (dekat saya)\nそれ (sore) = itu (dekat kamu)\nあれ (are) = itu (jauh dari kita)\nどれ (dore) = yang mana?\n\n私{わたし}の本{ほん}はこれです\nWatashi no hon wa kore desu",
+    "result": "Ini (dekat saya), itu (dekat kamu), itu (jauh), yang mana?\nBuku saya adalah ini.",
+    "why": "Sistem ini membantu komunikasi spasial yang jelas tanpa menunjuk langsung.",
+    "howTo": [
+      "こ (ko): dekat saya (kore = benda ini, koko = tempat ini)",
+      "そ (so): dekat kamu (sore = benda itu, soko = tempat itu)",
+      "あ (a): jauh (are = benda itu jauh, asoko = tempat itu jauh)",
+      "ど (do): tanya (dore = yang mana, doko = di mana)"
+    ],
+    "usage": "Bertanya dan menunjukkan benda dalam percakapan sehari-hari."
+  },
+  {
+    "category": "machinelearning",
+    "title": "Kapan pakai Linear Regression vs Logistic Regression",
+    "body": "Linear Regression untuk prediksi nilai kontinu, Logistic Regression untuk klasifikasi biner.",
+    "example": "Linear: Prediksi harga rumah (kontinu)\nLogistic: Prediksi spam/not-spam (binary)",
+    "result": "Linear output: 250.5 (harga dalam juta)\nLogistic output: 0.82 (probabilitas spam)",
+    "why": "Linear pakai garis lurus yang terus tak terbatas, Logistic pakai sigmoid yang output antara 0-1.",
+    "howTo": [
+      "Pakai Linear Regression untuk harga, suhu, penjualan",
+      "Pakai Logistic Regression untuk ya/tidak, sakit/sehat, lulus/gagal",
+      "Cek apakah target variable kontinu atau kategorikal"
+    ],
+    "usage": "Memilih algoritma yang tepat untuk problem regression vs classification."
+  },
+  {
+    "category": "machinelearning",
+    "title": "Overfitting: Model terlalu bagus di training, buruk di test",
+    "body": "Model menghafal noise dan pola spesifik di data training, bukan belajar pola umum.",
+    "example": "Akurasi training: 99%\nAkurasi validation: 65%\nGap besar = overfitting",
+    "result": "Model performa luar biasa di data yang dilihat, tapi jelek di data baru.",
+    "why": "Model terlalu kompleks untuk data yang ada, belajar detail yang tidak general.",
+    "howTo": [
+      "Kurangi kompleksitas model (kurangi layer, neuron)",
+      "Tambahkan regularization (L1/L2)",
+      "Pakai lebih banyak data training",
+      "Pakai cross-validation untuk evaluasi"
+    ],
+    "usage": "Mendiagnosa dan memperbaiki model yang tidak generalisasi dengan baik."
+  },
+  {
+    "category": "machinelearning",
+    "title": "K-Nearest Neighbors: Sederhana tapi powerful untuk data kecil",
+    "body": "Klasifikasi berdasarkan mayoritas kelas dari k tetangga terdekat.",
+    "example": "K=3: cari 3 data terdekat, lihat kelas mereka, pilih kelas mayoritas",
+    "result": "Tanpa training yang kompleks, hanya hitung jarak dan voting.",
+    "why": "Berdasarkan asumsi: data yang serupa punya label yang sama.",
+    "howTo": [
+      "Pilih K ganjil untuk menghindari tie (3, 5, 7)",
+      "Normalisasi fitur karena KNN sensitif terhadap skala",
+      "Pakai untuk dataset kecil (<10k samples)",
+      "Cocok untuk data dengan boundary non-linear"
+    ],
+    "usage": "Prototyping cepat, dataset kecil, atau sebagai baseline model."
+  },
+  {
+    "category": "machinelearning",
+    "title": "Decision Tree vs Random Forest",
+    "body": "Decision Tree tunggal rentan overfitting, Random Forest ensemble lebih stabil.",
+    "example": "Decision Tree: 1 pohon keputusan\nRandom Forest: 100+ pohon, voting hasil",
+    "result": "Random Forest lebih robust terhadap noise dan outliers.",
+    "why": "Forest mengurangi variance dengan menggabungkan banyak model yang berbeda.",
+    "howTo": [
+      "Pakai Decision Tree untuk interpretability (bisa dilihat rules)",
+      "Pakai Random Forest untuk accuracy yang lebih tinggi",
+      "Atur n_estimators (biasanya 100-500)",
+      "Random Forest butuh lebih banyak komputasi"
+    ],
+    "usage": "Memilih antara model yang mudah diinterpretasi vs model yang lebih akurat."
+  },
+  {
+    "category": "machinelearning",
+    "title": "Feature Engineering lebih penting daripada algoritma kompleks",
+    "body": "Fitur yang baik > algoritma canggih. Garbage in, garbage out.",
+    "example": "Daripada pakai neural network kompleks dengan raw data,\nbuat feature yang bermakna: ratio, aggregates, interactions",
+    "result": "Model sederhana dengan feature bagus sering mengalahkan model kompleks.",
+    "why": "Algoritma hanya bisa belajar pola yang ada di data. Pola yang tidak ada tidak bisa dipelajari.",
+    "howTo": [
+      "Eksplorasi data dulu sebelum modeling",
+      "Buat feature dari domain knowledge",
+      "Handle missing values dan outliers",
+      "Encoding categorical variables dengan tepat"
+    ],
+    "usage": "Meningkatkan performa model dengan investasi waktu di pra-pemrosesan data."
+  },
+  {
+    "category": "machinelearning",
+    "title": "Clustering: Unsupervised learning untuk segmentasi",
+    "body": "Mengelompokkan data tanpa label, berdasarkan kesamaan.",
+    "example": "K-means: kelompokkan customer berdasarkan pembelian\nDBSCAN: temukan cluster dengan density yang berbeda",
+    "result": "Segmentasi customer, anomaly detection, data compression.",
+    "why": "Tidak semua data punya label. Clustering membantu menemukan pola tersembunyi.",
+    "howTo": [
+      "Pilih K-means untuk cluster spherical dan ukuran sama",
+      "Pilih DBSCAN untuk cluster dengan density beragam",
+      "Tentukan jumlah cluster dengan elbow method",
+      "Visualisasi dengan PCA/t-SNE untuk interpretasi"
+    ],
+    "usage": "Market segmentation, social network analysis, image compression."
+  }
+]

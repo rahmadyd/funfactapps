@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furigana Test</title>
+    <style>
+        .furigana-container {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 2px;
+        }
+        .furigana-text {
+            display: block;
+            font-size: 0.65rem;
+            line-height: 1;
+            color: #666;
+            margin-bottom: 0.1rem;
+            font-family: "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+            text-align: center;
+        }
+        .kanji-text {
+            display: block;
+            font-size: 1.125rem;
+            line-height: 1.2;
+            font-family: "Hiragino Mincho Pro", "MS Mincho", serif;
+            text-align: center;
+        }
+        .dark .furigana-text {
+            color: #aaa;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .test-case {
+            background: #f5f5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+        }
+        .dark-mode {
+            background: #1d1c1b;
+            color: #e6e2da;
+        }
+        .dark-mode .test-case {
+            background: #262523;
+        }
+    </style>
+</head>
+<body>
+    <h1>Furigana Rendering Test</h1>
+    
+    <h2>Light Mode</h2>
+    <div class="test-case">
+        <p>Contoh kalimat dengan furigana:</p>
+        <p>
+            私<span class="furigana-container"><span class="furigana-text">わたし</span><span class="kanji-text">私</span></span>
+            は学生<span class="furigana-container"><span class="furigana-text">がくせい</span><span class="kanji-text">学生</span></span>
+            です
+        </p>
+    </div>
+    
+    <div class="test-case">
+        <p>Format: [kanji]{hiragana}</p>
+        <p>[私]{わたし}は[学生]{がくせい}です</p>
+    </div>
+    
+    <div class="test-case">
+        <p>Format: kanji{hiragana}</p>
+        <p>私{わたし}は学生{がくせい}です</p>
+    </div>
+    
+    <h2>Dark Mode</h2>
+    <div class="dark-mode">
+        <div class="test-case">
+            <p>Contoh kalimat dengan furigana:</p>
+            <p>
+                私<span class="furigana-container"><span class="furigana-text">わたし</span><span class="kanji-text">私</span></span>
+                は学生<span class="furigana-container"><span class="furigana-text">がくせい</span><span class="kanji-text">学生</span></span>
+                です
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        // Simple furigana parser for test
+        function parseFurigana(text) {
+            // Match [kanji]{hiragana} or kanji{hiragana}
+            const pattern = /(\[[^\]]+\]\{[^}]+\}|[^\[]\{[^}]+\})/g;
+            return text.replace(pattern, (match) => {
+                let kanji = '';
+                let hiragana = '';
+                
+                if (match.startsWith('[')) {
+                    const matches = match.match(/\[([^\]]+)\]\{([^}]+)\}/);
+                    if (matches) {
+                        kanji = matches[1];
+                        hiragana = matches[2];
+                    }
+                } else {
+                    const matches = match.match(/([^\{]+)\{([^}]+)\}/);
+                    if (matches) {
+                        kanji = matches[1];
+                        hiragana = matches[2];
+                    }
+                }
+                
+                if (kanji && hiragana) {
+                    return `<span class="furigana-container"><span class="furigana-text">${hiragana}</span><span class="kanji-text">${kanji}</span></span>`;
+                }
+                return match;
+            });
+        }
+        
+        // Apply parsing to test cases
+        document.querySelectorAll('.test-case p:last-child').forEach(p => {
+            if (p.innerHTML.includes('{') && p.innerHTML.includes('}') && !p.innerHTML.includes('furigana-container')) {
+                p.innerHTML = parseFurigana(p.innerHTML);
+            }
+        });
+    </script>
+</body>
+</html>
