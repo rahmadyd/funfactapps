@@ -16,6 +16,13 @@ const categoryDotColor: Record<Fact["category"], string> = {
   design: "bg-purple-500",
   japanese: "bg-rose-500",
   machinelearning: "bg-emerald-500",
+  react: "bg-cyan-500",
+  nodejs: "bg-emerald-600",
+  sql: "bg-blue-500",
+  nosql: "bg-teal-500",
+  excel: "bg-green-600",
+  ielts: "bg-orange-500",
+  affirmation: "bg-violet-500",
 };
 
 const categoryNames: Record<Fact["category"], string> = {
@@ -24,6 +31,13 @@ const categoryNames: Record<Fact["category"], string> = {
   design: "Desain",
   japanese: "Jepang",
   machinelearning: "ML / Data",
+  react: "React.js",
+  nodejs: "Node.js",
+  sql: "SQL",
+  nosql: "NoSQL",
+  excel: "Excel",
+  ielts: "IELTS",
+  affirmation: "Afirmasi",
 };
 
 export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdate }: FavoritesProps) {

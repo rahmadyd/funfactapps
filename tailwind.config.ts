@@ -14,6 +14,13 @@ const config: Config = {
         design: '#9a3fb0',
         japanese: '#b8324a',
         machinelearning: '#3d8b7a',
+        react: '#0891b2',
+        nodejs: '#15803d',
+        sql: '#2563eb',
+        nosql: '#0d9488',
+        excel: '#047857',
+        ielts: '#ea580c',
+        affirmation: '#7c3aed',
         background: {
           light: '#f6f3ee',
           dark: '#1d1c1b',

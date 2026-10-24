@@ -39,6 +39,41 @@ const categoryMeta: Record<Fact["category"], { name: string; tagClass: string; d
     tagClass: "bg-emerald-50 text-emerald-700 border-emerald-200/60",
     dotClass: "bg-emerald-500",
   },
+  react: {
+    name: "React.js",
+    tagClass: "bg-cyan-50 text-cyan-800 border-cyan-200/60",
+    dotClass: "bg-cyan-500",
+  },
+  nodejs: {
+    name: "Node.js",
+    tagClass: "bg-emerald-50 text-emerald-800 border-emerald-200/60",
+    dotClass: "bg-emerald-600",
+  },
+  sql: {
+    name: "Database SQL",
+    tagClass: "bg-blue-50 text-blue-800 border-blue-200/60",
+    dotClass: "bg-blue-500",
+  },
+  nosql: {
+    name: "Database NoSQL",
+    tagClass: "bg-teal-50 text-teal-800 border-teal-200/60",
+    dotClass: "bg-teal-500",
+  },
+  excel: {
+    name: "Excel (Admin)",
+    tagClass: "bg-green-50 text-green-800 border-green-200/60",
+    dotClass: "bg-green-600",
+  },
+  ielts: {
+    name: "IELTS Prep",
+    tagClass: "bg-orange-50 text-orange-800 border-orange-200/60",
+    dotClass: "bg-orange-500",
+  },
+  affirmation: {
+    name: "Afirmasi Diri",
+    tagClass: "bg-violet-50 text-violet-800 border-violet-200/60",
+    dotClass: "bg-violet-500",
+  },
 };
 
 // Helper function to render furigana for Japanese text
@@ -184,7 +219,64 @@ export default function FactCard({
     }
   };
 
-  const isCodeExample = fact.category === "python" || fact.category === "machinelearning";
+  const isCodeExample = [
+    "python",
+    "machinelearning",
+    "react",
+    "nodejs",
+    "sql",
+    "nosql",
+    "excel",
+  ].includes(fact.category);
+
+  const getExampleHeader = () => {
+    switch (fact.category) {
+      case "excel":
+        return "Kasus & Rumus Excel";
+      case "sql":
+        return "Query SQL";
+      case "nosql":
+        return "Query / Dokumen NoSQL";
+      case "react":
+        return "Kode Komponen / Hook";
+      case "nodejs":
+        return "Kode Runtime Node.js";
+      case "python":
+        return "Kode Python";
+      case "machinelearning":
+        return "Pseudocode / Kode ML";
+      case "affirmation":
+        return "Afirmasi Harian";
+      case "ielts":
+      case "toefl":
+        return "Contoh Frasa / Kalimat";
+      default:
+        return "Contoh";
+    }
+  };
+
+  const getResultHeader = () => {
+    switch (fact.category) {
+      case "excel":
+        return "Hasil Sel / Output";
+      case "sql":
+      case "nosql":
+        return "Hasil Query / Output";
+      case "python":
+      case "machinelearning":
+      case "react":
+      case "nodejs":
+        return "Hasil Eksekusi";
+      case "affirmation":
+        return "Refleksi & Mindset Shift";
+      case "ielts":
+      case "toefl":
+        return "Arti & Analisa";
+      default:
+        return "Arti / Hasil";
+    }
+  };
+
   const hasFurigana = fact.category === "japanese" && (fact.example.includes('{') || fact.example.includes('['));
   const currentCategory = categoryMeta[fact.category] || {
     name: fact.category,
@@ -281,7 +373,7 @@ export default function FactCard({
         {/* Header */}
         <div className="flex items-center justify-between px-4 py-2 bg-zinc-100/90 border-b border-zinc-200/80 text-xs font-medium text-zinc-500">
           <span className="uppercase tracking-wider font-semibold text-[11px] text-zinc-600">
-            {isCodeExample ? "Kasus / Kode" : "Contoh"}
+            {getExampleHeader()}
           </span>
           {isCodeExample && (
             <button
@@ -315,7 +407,7 @@ export default function FactCard({
                   <svg className="w-3.5 h-3.5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                   </svg>
-                  {fact.category === "python" || fact.category === "machinelearning" ? "Hasil Eksekusi" : "Arti / Hasil"}
+                  {getResultHeader()}
                 </span>
                 <button
                   onClick={onToggleReveal}

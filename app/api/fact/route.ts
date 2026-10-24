@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { buildMessages, pickCategory } from "@/lib/prompts";
-import { FactSchema } from "@/lib/schema";
+import { FactSchema, CATEGORIES } from "@/lib/schema";
 import seed from "@/data/seed-facts.json";
 
 export const maxDuration = 30;
 
 const ReqSchema = z.object({
-  category: z.enum(["python", "toefl", "design", "japanese", "machinelearning", "mixed"]).default("mixed"),
+  category: z.enum([...CATEGORIES, "mixed"]).default("mixed"),
   avoid: z.array(z.string()).default([]),
 });
 

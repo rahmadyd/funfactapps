@@ -259,5 +259,304 @@
       "Visualisasi dengan PCA/t-SNE untuk interpretasi"
     ],
     "usage": "Market segmentation, social network analysis, image compression."
+  },
+  {
+    "category": "react",
+    "title": "State di React tidak langsung ter-update (Batching)",
+    "body": "Memanggil setState bukan mengubah variabel saat itu juga, melainkan menjadwalkan update.",
+    "example": "const [count, setCount] = useState(0);\nconst tambahDua = () => {\n  setCount(count + 1);\n  setCount(count + 1);\n  console.log(count);\n};",
+    "result": "Di console masih 0, dan setelah render nilai count hanya naik jadi 1, bukan 2.",
+    "why": "React mengelompokkan (batch) banyak update state ke dalam satu re-render demi efisiensi performa.",
+    "howTo": [
+      "Pakai updater function jika nilai baru tergantung nilai lama: setCount(prev => prev + 1)",
+      "Hindari membaca state langsung setelah baris setter di event handler",
+      "Gunakan useEffect jika ingin bereaksi terhadap perubahan state"
+    ],
+    "usage": "Menghindari bug counter ganda, input formulir, atau kalkulasi keranjang belanja."
+  },
+  {
+    "category": "react",
+    "title": "Jangan pakai index array sebagai 'key' pada list dinamis",
+    "body": "Menggunakan index sebagai key bisa menyebabkan bug input dan render yang salah saat urutan berubah.",
+    "example": "items.map((item, index) => (\n  <TodoItem key={index} item={item} />\n))\n// Berbahaya jika ada delete atau sort",
+    "result": "Input teks tertinggal di baris yang salah dan animasi reorder menjadi kacau.",
+    "why": "React memakai key untuk mengenali identitas unik elemen saat diffing Virtual DOM. Jika index bergeser, React salah mencocokkan state internal komponen.",
+    "howTo": [
+      "Gunakan ID unik dari database (misal: item.id atau UUID)",
+      "Index hanya boleh jika list bersifat statis dan tidak pernah di-filter/di-sort",
+      "Jangan gunakan Math.random() sebagai key karena memicu unmount tiap render"
+    ],
+    "usage": "Membuat daftar Todo, keranjang belanja, atau tabel data yang bisa dihapus dan diurutkan."
+  },
+  {
+    "category": "react",
+    "title": "useMemo & useCallback sering dipakai berlebihan",
+    "body": "Kedua hook ini punya ongkos memori sendiri dan tidak otomatis membuat aplikasi lebih cepat.",
+    "example": "// Seringkali tidak perlu:\nconst total = useMemo(() => a + b, [a, b]);\n// Cukup tulis langsung:\nconst total = a + b;",
+    "result": "Kalkulasi ringan seperti penjumlahan justru lebih lambat karena overhead pembacaan dependency array.",
+    "why": "React membuat fungsi closure dan membandingkan array dependencies di setiap render untuk useMemo/useCallback.",
+    "howTo": [
+      "Gunakan useMemo hanya untuk kalkulasi berat (misal loop ribuan data)",
+      "Gunakan useCallback jika fungsi dioper ke child component yang dibungkus React.memo",
+      "Fokus pada profiling performa (React DevTools) sebelum optimasi"
+    ],
+    "usage": "Mengoptimalkan tabel data besar atau grafik interaktif tanpa membuang memori di komponen kecil."
+  },
+  {
+    "category": "nodejs",
+    "title": "Node.js Single-Threaded, tapi bisa handle ribuan request",
+    "body": "JavaScript-nya berjalan di satu thread, namun operasi lambat (I/O) didelegasikan ke thread pool C++ (libuv).",
+    "example": "console.log('1. Mulai');\nsetTimeout(() => console.log('2. Timer selesai'), 0);\nconsole.log('3. Selesai');",
+    "result": "1. Mulai\n3. Selesai\n2. Timer selesai",
+    "why": "Callback setTimeout masuk ke Macrotask Queue dan baru dieksekusi setelah Call Stack utama benar-benar kosong.",
+    "howTo": [
+      "Jangan memblokir Event Loop dengan komputasi berat (misal: crypto sync)",
+      "Manfaatkan Worker Threads untuk task CPU-bound",
+      "Gunakan operasi async non-blocking (fs/promises, fetch)"
+    ],
+    "usage": "Membangun REST API dan web server berkecepatan tinggi dengan konkurensi besar."
+  },
+  {
+    "category": "nodejs",
+    "title": "Gunakan Streams daripada fs.readFile untuk file raksasa",
+    "body": "Membaca file 2GB dengan readFile akan menelan 2GB RAM dan berpotensi crash (Out of Memory).",
+    "example": "import { createReadStream, createWriteStream } from 'fs';\n// Mengalirkan data per potongan kecil (chunks):\ncreateReadStream('video-besar.mp4')\n  .pipe(createWriteStream('salinan.mp4'));",
+    "result": "RAM yang dipakai hanya belasan Megabyte meskipun ukuran file mencapai beberapa Gigabyte.",
+    "why": "Streams memproses data sepotong demi sepotong (buffer chunk 64KB) tanpa harus menampung seluruh file di memori.",
+    "howTo": [
+      "Gunakan fs.createReadStream untuk membaca file besar",
+      "Gunakan stream pipeline untuk error handling yang aman",
+      "Terapkan transform stream untuk kompresi gzip on-the-fly"
+    ],
+    "usage": "Upload/download file video, parsing file CSV ratusan ribu baris, atau streaming media."
+  },
+  {
+    "category": "nodejs",
+    "title": "process.nextTick mendahului setTimeout 0",
+    "body": "nextTick bukan bagian dari fase Event Loop standar, melainkan dieksekusi tepat sebelum fase berikutnya.",
+    "example": "setTimeout(() => console.log('Timeout'), 0);\nprocess.nextTick(() => console.log('NextTick'));\nconsole.log('Baris Biasa');",
+    "result": "Baris Biasa\nNextTick\nTimeout",
+    "why": "nextTick queue diproses segera setelah operasi yang sedang berjalan selesai, sebelum Event Loop melanjutkan putarannya.",
+    "howTo": [
+      "Gunakan nextTick hanya saat perlu mengizinkan user mengikat event handler sebelum callback jalan",
+      "Hindari pemanggilan rekursif nextTick agar tidak menyebabkan I/O starvation",
+      "Gunakan setImmediate jika ingin callback berjalan di fase check loop berikutnya"
+    ],
+    "usage": "Menulis library Node.js tingkat lanjut atau penanganan siklus event emitter yang presisi."
+  },
+  {
+    "category": "sql",
+    "title": "WHERE vs HAVING: Kapan harus pakai mana?",
+    "body": "WHERE menyaring baris sebelum di-group, sedangkan HAVING menyaring hasil setelah agregasi.",
+    "example": "SELECT departemen, AVG(gaji) AS rerata\nFROM karyawan\nWHERE status = 'aktif'\nGROUP BY departemen\nHAVING AVG(gaji) > 10000000;",
+    "result": "Menampilkan hanya departemen aktif dengan rerata gaji di atas 10 juta.",
+    "why": "SQL mengeksekusi klausa FROM -> WHERE -> GROUP BY -> HAVING -> SELECT -> ORDER BY secara berurutan.",
+    "howTo": [
+      "Gunakan WHERE untuk kondisi kolom biasa (hemat komputasi lebih awal)",
+      "Gunakan HAVING khusus untuk fungsi agregat (SUM, AVG, COUNT)",
+      "Jangan gunakan HAVING untuk filter kolom yang bisa disaring di WHERE"
+    ],
+    "usage": "Laporan rekap penjualan cabang atau audit data gaji karyawan."
+  },
+  {
+    "category": "sql",
+    "title": "NULL bukan nol dan bukan string kosong",
+    "body": "NULL berarti 'data tidak diketahui' (UNKNOWN). Membandingkan NULL dengan tanda = akan selalu salah.",
+    "example": "SELECT * FROM pesanan WHERE catatan = NULL;\n-- Hasilnya selalu kosong!\nSELECT * FROM pesanan WHERE catatan IS NULL;\n-- Benar",
+    "result": "Kueri pertama 0 baris, kueri kedua menampilkan semua baris yang catatannya kosong.",
+    "why": "SQL menganut Three-Valued Logic (TRUE, FALSE, UNKNOWN). Ekspresi NULL = NULL menghasilkan UNKNOWN, bukan TRUE.",
+    "howTo": [
+      "Gunakan IS NULL atau IS NOT NULL untuk mengecek kekosongan",
+      "Gunakan fungsi COALESCE(kolom, nilai_default) untuk mengganti NULL",
+      "Beri constraint NOT NULL pada kolom penting saat membuat tabel"
+    ],
+    "usage": "Pencarian transaksi yang belum dibayar atau pengguna yang belum verifikasi email."
+  },
+  {
+    "category": "sql",
+    "title": "Index B-Tree mempercepat baca tapi memperlambat tulis",
+    "body": "Index bekerja seperti daftar isi buku. Mencari jadi kilat, tapi setiap INSERT/UPDATE butuh update pohon index.",
+    "example": "CREATE INDEX idx_user_email ON users(email);\nSELECT * FROM users WHERE email = 'andi@test.com';",
+    "result": "Pencarian melompat dari Full Table Scan (1000ms) menjadi Index Seek (2ms).",
+    "why": "Struktur data B-Tree memungkinkan pencarian kompleksitas O(log N) bukan O(N).",
+    "howTo": [
+      "Index kolom yang sering muncul di klausa WHERE, JOIN, dan ORDER BY",
+      "Hindari meng-index kolom dengan kardinalitas rendah (misal: jenis_kelamin)",
+      "Jalankan EXPLAIN ANALYZE untuk memastikan index benar-benar terpakai"
+    ],
+    "usage": "Optimasi sistem login, query pencarian produk e-commerce, atau pelacakan nomor resi."
+  },
+  {
+    "category": "nosql",
+    "title": "Embedding vs Referencing di MongoDB",
+    "body": "Pilih menyatukan data dalam satu dokumen (Embed) jika selalu dibaca bersama, atau referensi ID (Ref) jika data terus membesar.",
+    "example": "// Embed (Relasi 1:Sedikit):\n{ nama: 'Budi', alamat: [{ kota: 'Bandung' }] }\n// Reference (Relasi 1:Banyak tak terbatas):\n{ orderId: 'O-101', userId: ObjectId('...') }",
+    "result": "Embed: 1x baca super cepat tanpa JOIN. Reference: mencegah dokumen melebihi batas 16MB.",
+    "why": "MongoDB memiliki batas ukuran dokumen BSON 16MB dan query dokumen tunggal bersifat atomik.",
+    "howTo": [
+      "Embed data yang jarang berubah dan ukurannya terbatas (misal: alamat user)",
+      "Reference untuk log aktivitas atau relasi many-to-many",
+      "Gunakan $lookup jika perlu menggabungkan dokumen antar koleksi"
+    ],
+    "usage": "Merancang skema katalog e-commerce, profil pengguna, dan riwayat pesanan."
+  },
+  {
+    "category": "nosql",
+    "title": "Redis bukan sekadar key-value string biasa",
+    "body": "Redis mendukung struktur data asli seperti List, Hash, Set, dan Sorted Set di dalam RAM super kencang.",
+    "example": "// Sorted Set untuk Leaderboard Game:\nZADD leaderboard 1500 'user_andi'\nZADD leaderboard 2300 'user_budi'\nZREVRANGE leaderboard 0 2 WITHSCORES",
+    "result": "1) 'user_budi' - 2300\n2) 'user_andi' - 1500\nUrutan terhitung otomatis dalam < 1 milidetik!",
+    "why": "Redis berjalan in-memory dengan struktur data skip list dan hash table yang sangat teroptimasi.",
+    "howTo": [
+      "Gunakan Hash (HSET/HGET) untuk menyimpan objek user tanpa parsing JSON",
+      "Gunakan Sorted Set (ZSET) untuk sistem ranking dan antrean berbobot",
+      "Pasang TTL (EXPIRE) agar memori otomatis bersih dari data kedaluwarsa"
+    ],
+    "usage": "Papan skor game, rate limiting API, session store, dan cache respon database."
+  },
+  {
+    "category": "nosql",
+    "title": "TTL Index di MongoDB untuk hapus otomatis",
+    "body": "Kamu tidak perlu cron job khusus hanya untuk menghapus OTP atau token sesi yang sudah basi.",
+    "example": "db.token_otp.createIndex(\n  { \"createdAt\": 1 },\n  { expireAfterSeconds: 300 }\n);",
+    "result": "Dokumen OTP otomatis terhapus dari database tepat setelah 5 menit (300 detik).",
+    "why": "MongoDB memiliki background thread bawaan yang membaca index TTL dan menghapus dokumen yang expired.",
+    "howTo": [
+      "Pastikan field bertipe data Date (ISODate), bukan string atau timestamp angka",
+      "Cocok untuk temporary session, OTP code, atau log aplikasi sementara",
+      "Perhatikan bahwa penghapusan berjalan setiap 60 detik di background"
+    ],
+    "usage": "Sistem verifikasi kode SMS/Email, session login pengguna, dan cache keranjang tamu."
+  },
+  {
+    "category": "excel",
+    "title": "Tinggalkan VLOOKUP, beralihlah ke XLOOKUP",
+    "body": "XLOOKUP bisa mencari ke kiri, tidak terpengaruh sisipan kolom baru, dan punya penanganan error bawaan.",
+    "example": "=XLOOKUP(A2, Karyawan!C:C, Karyawan!A:A, \"Tidak Ditemukan\")\n// Cari ID di col C, ambil Nama di col A",
+    "result": "Menampilkan nama karyawan meskipun posisi kolomnya ada di sebelah kiri kolom ID.",
+    "why": "VLOOKUP mewajibkan kolom kunci berada di paling kiri dan memakai nomor indeks angka yang mudah berantakan saat kolom di-insert.",
+    "howTo": [
+      "Argumen 1: Nilai yang dicari",
+      "Argumen 2: Kolom tempat mencari",
+      "Argumen 3: Kolom hasil yang ingin diambil",
+      "Argumen 4: Teks jika tidak ditemukan (bebas error #N/A!)"
+    ],
+    "usage": "Mencocokkan data invoice vendor, cek database barang gudang, atau rekap absensi."
+  },
+  {
+    "category": "excel",
+    "title": "Flash Fill (Ctrl + E): Penyelamat Waktu Admin",
+    "body": "Excel bisa membaca pola pikiranmu dan memisahkan atau menggabungkan data secara instan tanpa satu pun rumus.",
+    "example": "Kolom A: 'Dr. Andi Pratama, S.Kom'\nKetik di Kolom B baris 1: 'Andi Pratama'\nTekan Ctrl + E di baris 2",
+    "result": "Seluruh ratusan baris ke bawah langsung terisi nama bersih tanpa gelar dalam hitungan detik!",
+    "why": "Fitur Flash Fill menggunakan AI pengenal pola berbasis contoh untuk mengekstrak atau merapikan data teks.",
+    "howTo": [
+      "Beri 1 atau 2 contoh hasil yang diinginkan di kolom sebelah data asli",
+      "Posisikan kursor di baris berikutnya, lalu tekan pintasan Ctrl + E",
+      "Periksa sekilas beberapa baris jika ada pola teks yang anomali"
+    ],
+    "usage": "Merapikan daftar nama pelanggan, mengekstrak nomor HP dari alamat, atau memisahkan tanggal lahir."
+  },
+  {
+    "category": "excel",
+    "title": "SUMIFS: Rekap total dengan banyak kriteria sekaligus",
+    "body": "Menghitung total nominal hanya untuk cabang tertentu, bulan tertentu, dan status 'Lunas' dalam satu rumus.",
+    "example": "=SUMIFS(D:D, A:A, \"Surabaya\", B:B, \"Lunas\", C:C, \">=01/01/2025\")\n// D: nominal, A: kota, B: status, C: tanggal",
+    "result": "Rp 128.500.000 (Total omset lunas cabang Surabaya tahun 2025).",
+    "why": "SUMIFS memfilter data baris demi baris menggunakan logika AND antar kriteria sebelum menjumlahkannya.",
+    "howTo": [
+      "Ingat urutannya: rentang yang dijumlahkan ada di posisi paling awal (beda dengan SUMIF)",
+      "Kriteria teks atau operator pembanding diapit tanda petik ganda (misal \">=100\")",
+      "Kombinasikan dengan referensi sel agar formula dinamis (misal \">=\"&F1)"
+    ],
+    "usage": "Membuat dashboard laporan keuangan bulanan, komisi sales, dan stok barang gudang."
+  },
+  {
+    "category": "ielts",
+    "title": "Hati-hati: FALSE vs NOT GIVEN di IELTS Reading",
+    "body": "FALSE berarti teks menyatakan kebalikan atau membantah fakta, sedangkan NOT GIVEN berarti informasinya sama sekali tidak disebutkan.",
+    "example": "Teks: 'The company was founded in 1995.'\nPernyataan 1: 'The company was founded in 2002.' -> FALSE\nPernyataan 2: 'The founder was a chemist.' -> NOT GIVEN",
+    "result": "Pernyataan 1 jelas bertentangan dengan teks. Pernyataan 2 mungkin benar di dunia nyata, tapi tidak tertulis di teks.",
+    "why": "IELTS menguji kemampuan verifikasi data objektif, bukan pengetahuan umum pembaca.",
+    "howTo": [
+      "Jangan gunakan logika atau asumsi pribadi; patuhi hanya fakta yang tertulis",
+      "Jika ada kata penentu ekstrem seperti 'always', 'only', 'all', teliti ulang",
+      "Jika kamu butuh 'menebak-nebak', kemungkinan besar jawabannya NOT GIVEN"
+    ],
+    "usage": "Meningkatkan akurasi dan kecepatan mengerjakan IELTS Reading Academic/General Section."
+  },
+  {
+    "category": "ielts",
+    "title": "Writing Task 1: Ragam kosakata tren grafik (Band 7+)",
+    "body": "Hindari mengulang-ulang 'increase' dan 'decrease' di setiap kalimat grafik.",
+    "example": "Band 6: 'The sales increased quickly, then decreased slowly.'\nBand 8: 'Sales witnessed a dramatic surge, followed by a steady decline.'",
+    "result": "Mendongkrak skor Lexical Resource dan Grammatical Range secara signifikan.",
+    "why": "Penguji IELTS mencari variasi kosakata akademik serta kombinasi kata kerja (verb) dan kata benda (noun phrase).",
+    "howTo": [
+      "Naik tajam: surge, soar, rocket",
+      "Turun drastis: plummet, plunge, slump",
+      "Stabil/mendatar: plateaued at, leveled off, remained relatively constant",
+      "Gunakan pola variasi: 'X experienced a sharp drop' vs 'X dropped sharply'"
+    ],
+    "usage": "Mendapatkan skor Band 7+ pada penulisan laporan grafik/diagram IELTS Academic."
+  },
+  {
+    "category": "ielts",
+    "title": "Writing Task 2: Hindari 'Overgeneralization' dengan Hedging",
+    "body": "Kalimat yang terlalu mutlak (semua orang, pasti) dianggap tidak ilmiah oleh penilai IELTS.",
+    "example": "Band 6: 'Technology makes children lazy and causes obesity.'\nBand 8: 'Excessive use of technology tends to encourage a sedentary lifestyle, which may contribute to childhood obesity.'",
+    "result": "Argumen terdengar lebih matang, analitis, dan sesuai dengan standar tulisan akademik dunia.",
+    "why": "Hedging (tentative language) menunjukkan kemampuan berpikir kritis bahwa suatu isu memiliki banyak faktor kompleks.",
+    "howTo": [
+      "Gunakan modal verbs: may, might, can, could",
+      "Gunakan kata probabilitas: likely, tend to, appear to",
+      "Hindari kata absolut seperti 'everybody', 'always', 'impossible'"
+    ],
+    "usage": "Menulis esai argumentatif, problem-solution, atau opinion di IELTS Writing Task 2."
+  },
+  {
+    "category": "affirmation",
+    "title": "Impostor Syndrome: Tanda kamu sedang bertumbuh",
+    "body": "Merasa belum cukup hebat bukan berarti kamu tidak kompeten; itu bukti kamu sedang berada di luar zona nyaman.",
+    "example": "Afirmasi: 'Aku tidak harus tahu segalanya hari ini. Rasa bingung ini adalah bukti nyata bahwa otakku sedang memproses keterampilan baru.'",
+    "result": "Menurunkan kecemasan belajar dan mengubah rasa minder menjadi rasa ingin tahu.",
+    "why": "Psikologi membuktikan bahwa orang yang peduli dengan kualitas karyanya justru paling sering meragukan diri sendiri.",
+    "howTo": [
+      "Fokus pada proses belajar harian daripada membandingkan hasil akhir orang lain",
+      "Catat 3 hal kecil yang berhasil kamu pahami hari ini",
+      "Ingat: Senior berpengalaman pun masih sering googling hal mendasar"
+    ],
+    "usage": "Menjaga semangat saat menghadapi kode rumit, materi baru, atau tantangan karir.",
+    "quote": "Keraguan membunuh lebih banyak mimpi daripada kegagalan yang sesungguhnya. - Suzy Kassem"
+  },
+  {
+    "category": "affirmation",
+    "title": "Stoic Control: Bedakan apa yang ada dalam kendalimu",
+    "body": "Kamu tidak bisa mengontrol hasil akhir, penilaian orang lain, atau masa lalu. Kamu hanya bisa mengontrol usahamu saat ini.",
+    "example": "Afirmasi: 'Fokus energiku hari ini hanya tertuju pada apa yang bisa kukerjakan detik ini. Respon orang lain bukan tanggung jawab moralku.'",
+    "result": "Kecemasan berkurang drastis, fokus meningkat, dan mental menjadi lebih tenang.",
+    "why": "Dichotomy of Control dalam filosofi Stoik membebaskan pikiran dari beban ekspektasi yang tidak realistis.",
+    "howTo": [
+      "Saat cemas, tanyakan: 'Apakah hal ini berada 100% di bawah kendaliku?'",
+      "Jika tidak, lepaskan dan alihkan perhatian ke langkah tindakan berikutnya",
+      "Tarik napas dalam 4 detik, tahan 4 detik, hembuskan 4 detik"
+    ],
+    "usage": "Menghadapi wawancara kerja, ujian penting, atau revisi tugas yang mendadak.",
+    "quote": "Bukan hal-hal di luar yang membuat kita menderita, melainkan cara kita memandangnya. - Epictetus"
+  },
+  {
+    "category": "affirmation",
+    "title": "Small Wins: Dopamin alami untuk otak yang lelah",
+    "body": "Menunggu proyek besar selesai untuk merasa bahagia membuat otak mudah lelah dan kehilangan motivasi.",
+    "example": "Afirmasi: 'Setiap baris kode dan setiap halaman yang kubaca hari ini adalah sebuah kemenangan nyata. Aku bangga pada konsistensiku.'",
+    "result": "Memicu pelepasan hormon dopamin yang membuatmu bersemangat melanjutkan belajar besok.",
+    "why": "Prinsip 'Progress Principle' dari riset Harvard membuktikan bahwa kemajuan kecil setiap hari adalah pendorong motivasi nomor satu.",
+    "howTo": [
+      "Pecah tugas besar menjadi sub-tugas berdurasi 15 menit",
+      "Beri centang atau apresiasi diri setiap menyelesaikan satu sub-tugas",
+      "Jangan tidur sebelum mengakui setidaknya satu kemajuan kecilmu hari ini"
+    ],
+    "usage": "Menjaga ritme belajar konsisten tanpa burnout saat menghadapi target jangka panjang.",
+    "quote": "Sukses adalah kumpulan dari usaha-usaha kecil yang diulang hari demi hari. - Robert Collier"
   }
 ]
