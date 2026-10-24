@@ -176,6 +176,81 @@ export const affirmationSubtopics = [
   "Kepercayaan diri saat menghadapi wawancara kerja dan tantangan baru"
 ];
 
+export const linuxSubtopics = [
+  "Perintah navigasi & manipulasi file (find, grep, xargs, rsync)",
+  "Permission file & folder (chmod angka oktal, chown, umask)",
+  "Piping dan redirection (| , >, >>, 2>&1, /dev/null)",
+  "Manajemen proses & monitoring (htop, ps aux, kill -9, killall, nice)",
+  "Systemd & service management (systemctl status/restart, journalctl -u)",
+  "Manajemen disk & storage (df -h, du -sh, ncdu, mount)",
+  "Trik terminal praktis (sudo !!, Ctrl+R reverse search, alias kustom)",
+  "Networking dasar (curl, wget, netstat, ss -tulpn, ping, traceroute)",
+  "SSH & Otentikasi (ssh-keygen, authorized_keys, config file host)",
+  "Cron jobs untuk jadwal otomatis (crontab -e, format menit-jam-hari)",
+  "Environment variables (export PATH, /etc/environment, ~/.bashrc)",
+  "Arsip & kompresi (tar -czvf, tar -xzvf, gzip)"
+];
+
+export const gitSubtopics = [
+  "Git Rebase vs Git Merge (kapan linear history diperlukan)",
+  "Git Reflog: penyelamat commit, branch, atau reset yang terhapus",
+  "Git Cherry-Pick untuk comot commit spesifik antar branch",
+  "Git Stash: simpan kerjaan sementara tanpa commit (stash pop/apply)",
+  "Git Commit Amend: revisi pesan commit terakhir & tambah file kelupaan",
+  "Git Reset (--soft vs --mixed vs --hard): perbedaan dampaknya",
+  "Git Bisect: pelacak otomatis commit penyebab bug dengan binary search",
+  "Conventional Commits (feat, fix, chore, breaking change) & SemVer",
+  "Trik .gitignore dan cara untrack file yang terlanjur ter-commit",
+  "GitHub Pull Request: Draft PR, Review Suggestion, & Squash Merge",
+  "Resolusi Merge Conflict yang rapi tanpa panik",
+  "Git Worktree: checkout banyak branch sekaligus di folder terpisah"
+];
+
+export const cicdSubtopics = [
+  "Konsep dasar CI vs CD: Continuous Integration vs Continuous Delivery/Deployment",
+  "GitHub Actions Workflow: triggers (push, pull_request, workflow_dispatch)",
+  "Caching dependencies (npm/yarn/pip) untuk memangkas waktu build pipeline",
+  "Matrix Builds: uji aplikasi serentak di berbagai versi runtime dan OS",
+  "Pengelolaan Secrets & Environment Variables aman di pipeline",
+  "Automated Testing & Coverage check sebagai syarat lolos status check",
+  "Linting, Type Check, & formatting otomatis di pull request",
+  "Artifact upload & download (folder build dist, test reports)",
+  "Strategi Deployment: Blue-Green vs Canary vs Rolling Updates",
+  "Otomatisasi rilis & changelog dengan GitHub Releases & SemVer",
+  "Docker Image Build & Push ke Container Registry (GHCR/Docker Hub) di CI",
+  "Rollback otomatis saat deployment staging/production gagal"
+];
+
+export const dockerSubtopics = [
+  "Container vs Virtual Machine: isolasi kernel vs OS penuh",
+  "Dockerfile instructions: perbedaan RUN vs CMD vs ENTRYPOINT",
+  "Multi-stage builds untuk pangkas ukuran image dari ratusan MB ke <50MB",
+  "Layer Caching: kenapa urutan COPY package.json harus sebelum COPY .",
+  "Docker Compose: orkestrasi multi-container (web + redis + postgres)",
+  "Bind Mounts vs Named Volumes untuk persistensi data database",
+  "Port Mapping (-p host_port:container_port) vs EXPOSE",
+  "Container Networking (bridge network, isolated network, inter-container DNS)",
+  "Minimal base image: Alpine Linux vs Debian-Slim vs Distroless",
+  "Docker hygiene: docker system prune, image dangling, dan hemat disk",
+  "Pengelolaan file sensitif: .dockerignore dan BuildKit Secrets",
+  "Healthcheck instruction untuk pantau kesiapan container otomatis"
+];
+
+export const tailwindSubtopics = [
+  "Filosofi Utility-First: kenapa bukan inline style dan anti class bloat",
+  "Arbitrary Values [value]: custom spacing, colors, dan calc() instan",
+  "Modifier State & Pseudo-class (hover, focus-visible, active, disabled)",
+  "Parent & Sibling States (group-hover, peer-checked, group-focus)",
+  "Responsive Design: mobile-first breakpoint (sm, md, lg, xl, 2xl)",
+  "Dark Mode strategy: selector class vs system media query",
+  "Container Queries (@container, @md, @lg) untuk komponen modular",
+  "Grid & Flexbox modern utilities (gap, place-items, col-span)",
+  "Tipografi & @tailwindcss/typography plugin (prose class)",
+  "Kapan memakai @apply vs kapan @apply menjadi anti-pattern",
+  "Tailwind JIT engine: zero-config engine & optimasi build instant",
+  "Gradient, backdrop-blur, dan Glassmorphism utilities"
+];
+
 export function pickCategory(requestedCategory: string): Category {
   if (requestedCategory === "mixed") {
     return CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
@@ -209,6 +284,16 @@ export function getRandomSubtopic(category: Category): string {
       return ieltsSubtopics[Math.floor(Math.random() * ieltsSubtopics.length)];
     case "affirmation":
       return affirmationSubtopics[Math.floor(Math.random() * affirmationSubtopics.length)];
+    case "linux":
+      return linuxSubtopics[Math.floor(Math.random() * linuxSubtopics.length)];
+    case "git":
+      return gitSubtopics[Math.floor(Math.random() * gitSubtopics.length)];
+    case "cicd":
+      return cicdSubtopics[Math.floor(Math.random() * cicdSubtopics.length)];
+    case "docker":
+      return dockerSubtopics[Math.floor(Math.random() * dockerSubtopics.length)];
+    case "tailwind":
+      return tailwindSubtopics[Math.floor(Math.random() * tailwindSubtopics.length)];
   }
 }
 
@@ -250,7 +335,12 @@ Skema JSON:
     nosql: "example berisi query MongoDB/Redis atau struktur dokumen JSON pendek (maks 6 baris). result berisi output data atau perilaku penyimpanan. Jelaskan kenapa pendekatan NoSQL cocok untuk skenario tersebut.",
     excel: "Fokus pada tips & rumus produktivitas admin kantor/keuangan. example berisi contoh rumus Excel konkret (misal: =XLOOKUP(...), =SUMIFS(...)) beserta skenario datanya. result berisi nilai sel atau hasil yang keluar. Sertakan tips shortcut keyboard jika relevan.",
     ielts: "Fokus pada persiapan tes IELTS (Band 7+). example berupa kalimat bahasa Inggris akademis atau perbandingan Band 6 vs Band 8+. result berisi arti Indonesia dan analisa mengapa ungkapan tersebut bernilai tinggi. Sertakan tips trik praktis untuk Listening, Reading, Writing, atau Speaking.",
-    affirmation: "Fokus pada penguatan mental, percaya diri, dan motivasi belajar/karir. example berisi kalimat afirmasi positif yang powerful dan realistis (bukan toxic positivity). result berisi dampak psikologis / perubahan pola pikir yang didapat. SELALU sertakan kutipan motivasi yang relevan di field 'quote' dari tokoh inspiratif (penulis, filsuf, psikolog, atau praktisi ternama)."
+    affirmation: "Fokus pada penguatan mental, percaya diri, dan motivasi belajar/karir. example berisi kalimat afirmasi positif yang powerful dan realistis (bukan toxic positivity). result berisi dampak psikologis / perubahan pola pikir yang didapat. SELALU sertakan kutipan motivasi yang relevan di field 'quote' dari tokoh inspiratif (penulis, filsuf, psikolog, atau praktisi ternama).",
+    linux: "example berisi perintah terminal Linux praktis (maks 3-5 baris). result berisi output terminal atau penjelasan efeknya. Fokus pada tips command line praktis, bash, navigasi, permission, atau manajemen server.",
+    git: "example berisi perintah Git (maks 3-5 baris) atau skenario branch/commit. result berisi status output git atau efek pada commit graph. Fokus pada trik praktis Git dan workflow kolaborasi GitHub.",
+    cicd: "example berisi potongan konfigurasi pipeline YAML (misal GitHub Actions, maks 6 baris) atau alur testing/deploy. result berisi efek pipeline atau status build. Jelaskan nilai praktis otomasi ini dalam siklus rilis.",
+    docker: "example berisi potongan Dockerfile atau perintah Docker CLI ringkas (maks 5-6 baris). result berisi output build, eksekusi container, atau hasil optimasi image. Fokus pada efisiensi container dan isolasi aplikasi.",
+    tailwind: "example berisi markup HTML/JSX dengan class utility Tailwind yang ringkas dan elegan (maks 5-6 baris). result berisi visualisasi styling atau efek class yang dihasilkan. Tunjukkan trik utility classes yang bersih."
   };
 
   const avoidText = avoid.length > 0 ? avoid.join("; ") : "tidak ada";

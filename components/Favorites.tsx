@@ -23,6 +23,11 @@ const categoryDotColor: Record<Fact["category"], string> = {
   excel: "bg-green-600",
   ielts: "bg-orange-500",
   affirmation: "bg-violet-500",
+  linux: "bg-amber-600",
+  git: "bg-orange-600",
+  cicd: "bg-sky-600",
+  docker: "bg-blue-600",
+  tailwind: "bg-teal-500",
 };
 
 const categoryNames: Record<Fact["category"], string> = {
@@ -38,6 +43,11 @@ const categoryNames: Record<Fact["category"], string> = {
   excel: "Excel",
   ielts: "IELTS",
   affirmation: "Afirmasi",
+  linux: "Linux",
+  git: "Git/GitHub",
+  cicd: "CI/CD",
+  docker: "Docker",
+  tailwind: "Tailwind",
 };
 
 export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdate }: FavoritesProps) {

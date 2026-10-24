@@ -558,5 +558,215 @@
     ],
     "usage": "Menjaga ritme belajar konsisten tanpa burnout saat menghadapi target jangka panjang.",
     "quote": "Sukses adalah kumpulan dari usaha-usaha kecil yang diulang hari demi hari. - Robert Collier"
+  },
+  {
+    "category": "linux",
+    "title": "sudo !! mengeksekusi ulang perintah terakhir dengan hak root",
+    "body": "Lupa mengetik sudo sebelum perintah sistem? Kamu tidak perlu mengetik ulang seluruh baris perintah.",
+    "example": "apt update\n# Output: Permission denied\nsudo !!",
+    "result": "sudo apt update\n[sudo] password for user:\nHit:1 http://archive.ubuntu.com/ubuntu focal InRelease\nReading package lists... Done",
+    "why": "Di Bash shell, tanda seru ganda (!!) adalah history expansion yang merujuk pada baris perintah yang baru saja kamu jalankan.",
+    "howTo": [
+      "Jalankan perintah yang butuh akses root tanpa sengaja",
+      "Ketik sudo !! lalu tekan Enter",
+      "Ketik password root/sudo bila diminta"
+    ],
+    "usage": "Menghemat waktu saat instalasi paket, konfigurasi nginx, atau restart service di server."
+  },
+  {
+    "category": "linux",
+    "title": "Arti angka oktal 755 dan 644 pada izin file Linux",
+    "body": "Angka di chmod adalah penjumlahan nilai biner: 4 untuk Read, 2 untuk Write, dan 1 untuk Execute.",
+    "example": "# Owner: rwx (4+2+1=7)\n# Group: r-x (4+0+1=5)\n# Others: r-x (4+0+1=5)\nchmod 755 deploy.sh",
+    "result": "-rwxr-xr-x 1 user webgroup 1024 Oct 24 12:00 deploy.sh",
+    "why": "Linux membagi hak akses ke 3 level (User, Group, Other) dengan kombinasi bit matematika 4, 2, 1 agar efisien.",
+    "howTo": [
+      "Gunakan 644 (rw-r--r--) untuk file dokumen atau web assets statis",
+      "Gunakan 755 (rwxr-xr-x) untuk folder atau script yang perlu dieksekusi",
+      "Hindari chmod 777 di production karena membuka celah keamanan publik"
+    ],
+    "usage": "Mengatur izin file upload dan bash script di server web VPS agar aman dari eksekusi liar."
+  },
+  {
+    "category": "linux",
+    "title": "Piping 2>&1 dan /dev/null untuk membuang error output",
+    "body": "Linux membedakan output standar (stdout/1) dan pesan error (stderr/2) dalam kanal yang berbeda.",
+    "example": "# Membuang semua output dan error tanpa tampil di layar\n./backup-script.sh > /dev/null 2>&1",
+    "result": "(Proses berjalan di background tanpa mencetak apapun ke terminal)",
+    "why": "> /dev/null membuang stdout ke 'lubang hitam' virtual, dan 2>&1 mengarahkan stderr ke tempat yang sama dengan stdout.",
+    "howTo": [
+      "Gunakan > file.log 2>&1 untuk menyimpan seluruh log dan error dalam satu file",
+      "Arahkan ke /dev/null jika script dijalankan via cron job tanpa spam email",
+      "Ketik & di ujung perintah untuk menjalankan proses di latar belakang"
+    ],
+    "usage": "Menulis cron jobs otomatis yang bersih tanpa mengotori disk atau terminal."
+  },
+  {
+    "category": "git",
+    "title": "git reflog: tombol undo penyelamat commit yang terhapus",
+    "body": "Bahkan setelah git reset --hard, commit lamamu sebenarnya belum hilang dan masih bisa diselamatkan.",
+    "example": "git reset --hard HEAD~1\ngit reflog\ngit reset --hard HEAD@{1}",
+    "result": "HEAD@{0}: reset: moving to HEAD@{1}\nHEAD@{1}: commit: feat: tambah sistem autentikasi\nHEAD is now at a1b2c3d feat: tambah sistem autentikasi",
+    "why": "Git mencatat setiap pergerakan pointer HEAD lokal di reflog selama minimal 30-90 hari sebelum garbage collection.",
+    "howTo": [
+      "Ketik git reflog di terminal untuk melihat riwayat aktivitas HEAD",
+      "Cari hash commit atau indeks HEAD@{n} sebelum bencana terjadi",
+      "Jalankan git checkout <hash> atau git reset --hard HEAD@{n}"
+    ],
+    "usage": "Menyelamatkan kode penting tim yang tidak sengaja ter-reset atau terhapus saat rebase."
+  },
+  {
+    "category": "git",
+    "title": "git stash -u menyimpan file untracked yang baru dibuat",
+    "body": "git stash standar hanya menyimpan file yang sudah di-track, melewati file baru yang belum pernah di-commit.",
+    "example": "# Menyimpan perubahan termasuk file-file baru\ngit stash -u\n# Mengembalikan kembali nanti\ngit stash pop",
+    "result": "Saved working directory and index state WIP on main: a1b2c3d\nUnversioned files:\n  components/NewModal.tsx",
+    "why": "Opsi -u (--include-untracked) memberi tahu Git untuk memasukkan file yang belum masuk staging area ke tempat penyimpanan sementara.",
+    "howTo": [
+      "Pakai git stash -u saat ingin pindah branch darurat untuk hotfix",
+      "Gunakan git stash list untuk melihat daftar simpanan",
+      "Ketik git stash pop untuk mengembalikan perubahan ke folder kerja"
+    ],
+    "usage": "Pindah ke branch review tanpa harus membuat 'wip commit' yang mengotori riwayat git."
+  },
+  {
+    "category": "git",
+    "title": "git cherry-pick untuk mencomot commit tertentu antar branch",
+    "body": "Kamu bisa mengambil satu perbaikan bug spesifik dari branch lain tanpa harus menelan seluruh branch.",
+    "example": "# Ambil commit fix-login (hash 9f4e2a1) ke branch main\ngit checkout main\ngit cherry-pick 9f4e2a1",
+    "result": "[main 7b3d1c4] fix: atasi token expired di login\n 1 file changed, 8 insertions(+), 2 deletions(-)",
+    "why": "Cherry-pick menerapkan diff patch dari commit asal dan membuat commit baru dengan identitas hash baru di branch aktif.",
+    "howTo": [
+      "Cari hash commit yang ingin dipindahkan via git log",
+      "Pindah ke branch tujuan dengan git checkout <target-branch>",
+      "Jalankan git cherry-pick <commit-hash>"
+    ],
+    "usage": "Menerapkan hotfix darurat ke branch production tanpa membawa fitur eksperimental yang belum siap."
+  },
+  {
+    "category": "cicd",
+    "title": "Perbedaan esensial Continuous Integration dan Continuous Deployment",
+    "body": "CI memastikan kode bebas error sebelum digabung, sedangkan CD memastikan aplikasi siap rilis ke user otomatis.",
+    "example": "# Alur CI/CD sederhana:\n# 1. Developer Push -> 2. Run Test & Linter (CI)\n# 3. Build Container -> 4. Deploy ke Production (CD)",
+    "result": "✔ All 42 tests passed\n✔ Build completed in 32s\n✔ Deployed to production: https://app.example.com",
+    "why": "Otomatisasi pengujian di CI mencegah 'integration hell', sementara CD memangkas waktu tunggu rilis dari mingguan ke harian.",
+    "howTo": [
+      "Jadikan automated test sebagai syarat mutlak lulus sebelum Pull Request boleh di-merge",
+      "Gunakan environment staging sebelum melepaskan build ke production",
+      "Pasang webhook alert (Slack/Discord) jika pipeline build mengalami kegagalan"
+    ],
+    "usage": "Menjaga kualitas aplikasi tim engineering skala besar dengan frekuensi rilis tinggi."
+  },
+  {
+    "category": "cicd",
+    "title": "Dependency Caching di CI memangkas durasi build hingga 70%",
+    "body": "Mengunduh ratusan megabyte node_modules di setiap commit baru memboroskan bandwidth dan waktu tim.",
+    "example": "- name: Setup Node & Cache\n  uses: actions/setup-node@v4\n  with:\n    node-version: 20\n    cache: 'npm'",
+    "result": "Found cache for key: node-cache-linux-x64-hash\nRestored 240MB in 2.1s (Tanpa download ulang dari npmjs)",
+    "why": "CI memeriksa hash file package-lock.json; jika hash tidak berubah, CI mengambil zip dependencies langsung dari cache cepat lokal.",
+    "howTo": [
+      "Aktifkan cache bawaan actions/setup-node atau actions/cache",
+      "Kunci versi dependensi dengan file lock (package-lock.json / yarn.lock)",
+      "Hindari meng-cache folder hasil build dinamis yang selalu berubah"
+    ],
+    "usage": "Mempercepat feedback loop developer saat menunggu status check Pull Request di GitHub."
+  },
+  {
+    "category": "cicd",
+    "title": "Matrix Builds: uji aplikasi serentak di berbagai versi OS & runtime",
+    "body": "Daripada membuat script pengujian terpisah, matrix build menduplikasi job secara paralel otomatis.",
+    "example": "strategy:\n  matrix:\n    os: [ubuntu-latest, macos-latest]\n    node-version: [18.x, 20.x, 22.x]",
+    "result": "6 jobs berjalan bersamaan:\n✔ ubuntu-latest (Node 18)  ✔ macos-latest (Node 18)\n✔ ubuntu-latest (Node 20)  ✔ macos-latest (Node 20)\n✔ ubuntu-latest (Node 22)  ✔ macos-latest (Node 22)",
+    "why": "Fitur matrix memungkinkan pengujian kompatibilitas silang platform dalam satu deklarasi konfigurasi ringkas.",
+    "howTo": [
+      "Gunakan strategy.matrix di file workflow GitHub Actions",
+      "Pasang fail-fast: false jika ingin seluruh job tetap selesai meski ada 1 versi yang gagal",
+      "Ideal untuk author library open-source yang mendukung banyak versi"
+    ],
+    "usage": "Memastikan paket NPM atau software kamu berjalan mulus di Windows, Mac, dan Linux tanpa beli banyak laptop."
+  },
+  {
+    "category": "docker",
+    "title": "Multi-stage build memangkas ukuran image dari 1GB ke <60MB",
+    "body": "Image production tidak membutuhkan compiler, git, typescript, atau devDependencies yang berat.",
+    "example": "FROM node:20-alpine AS builder\nWORKDIR /app\nCOPY . .\nRUN npm run build\n\nFROM node:20-alpine AS runner\nCOPY --from=builder /app/dist ./dist\nCMD [\"node\", \"dist/server.js\"]",
+    "result": "REPOSITORY      TAG       SIZE\napp-single      latest    980MB\napp-multistage  latest    54MB",
+    "why": "Multi-stage build memisahkan tahap kompilasi dan tahap runtime, hanya menyalin file artefak final ke image akhir.",
+    "howTo": [
+      "Beri nama tahap kompilasi dengan kata kunci AS builder",
+      "Gunakan base image yang minimalis seperti node:alpine untuk tahap runner",
+      "Salin artefak yang dibutuhkan saja dengan COPY --from=builder"
+    ],
+    "usage": "Mempercepat proses download image di server Kubernetes dan menghemat tagihan cloud storage registry."
+  },
+  {
+    "category": "docker",
+    "title": "Urutan COPY package.json memaksimalkan Docker Layer Caching",
+    "body": "Menaruh COPY . . sebelum npm install membuat instalasi paket diulang setiap ada 1 baris kode yang berubah.",
+    "example": "# Urutan yang benar (Efisien):\nCOPY package*.json ./\nRUN npm install\nCOPY . .\nRUN npm run build",
+    "result": "Step 2/5 : COPY package*.json ./ ---> Using cache\nStep 3/5 : RUN npm install       ---> Using cache (0.001s)\nStep 4/5 : COPY . .              ---> 0.4s",
+    "why": "Docker membangun image lapis demi lapis (layers). Jika file di suatu layer tidak berubah, Docker memakai cache.",
+    "howTo": [
+      "Salin manifest dependensi (package.json / requirements.txt) terlebih dahulu",
+      "Jalankan perintah instalasi dependensi sebelum menyalin seluruh kode sumber",
+      "Gunakan file .dockerignore agar node_modules lokal tidak ikut ter-copy"
+    ],
+    "usage": "Mengurangi waktu build Docker dari 3 menit menjadi hanya 3 detik saat iterasi kode harian."
+  },
+  {
+    "category": "docker",
+    "title": "docker system prune membebaskan puluhan gigabyte disk yang hilang",
+    "body": "Container yang mati, dangling image, dan build cache lama diam-diam menumpuk dan memenuhi harddisk.",
+    "example": "# Bersihkan container mati, network tak terpakai, dan dangling images\ndocker system prune -a --volumes",
+    "result": "Total reclaimed space: 24.85GB",
+    "why": "Docker tidak otomatis menghapus image versi lama saat kamu mem-build versi baru dengan nama tag yang sama.",
+    "howTo": [
+      "Cek pemakaian disk Docker dengan docker system df",
+      "Jalankan docker system prune untuk pembersihan aman rutin",
+      "Hati-hati dengan flag --volumes jika ada database lokal yang datanya ingin dipertahankan"
+    ],
+    "usage": "Mengatasi masalah server cloud atau laptop developer yang tiba-tiba kehabisan disk space (No space left on device)."
+  },
+  {
+    "category": "tailwind",
+    "title": "Arbitrary Values [value] untuk nilai kustom instan tanpa file CSS",
+    "body": "Kamu tidak perlu keluar dari HTML atau mengedit konfigurasi Tailwind hanya untuk ukuran pixel yang spesifik.",
+    "example": "<div className=\"top-[117px] grid-cols-[200px_1fr] bg-[#1a202c]/80 backdrop-blur-[2px]\">\n  Desain Presisi\n</div>",
+    "result": "Menghasilkan CSS dinamis secara otomatis: top: 117px; grid-template-columns: 200px 1fr;",
+    "why": "Compiler JIT (Just-In-Time) Tailwind men-generate class CSS on-the-fly saat mendeteksi tanda kurung siku [].",
+    "howTo": [
+      "Gunakan kurung siku [ ] untuk nilai spesifik seperti h-[calc(100vh-64px)]",
+      "Gunakan garis bawah _ sebagai pengganti spasi di dalam kurung siku",
+      "Kombinasikan dengan opacity modifier seperti bg-brand/80"
+    ],
+    "usage": "Mengimplementasikan desain Figma pixel-perfect tanpa mengotori berkas CSS global."
+  },
+  {
+    "category": "tailwind",
+    "title": "group-hover dan peer: styling elemen lain tanpa sebaris JavaScript",
+    "body": "Ubah warna ikon atau tampilkan tooltip saat kartu induk di-hover hanya dengan class utilitas Tailwind.",
+    "example": "<div className=\"group p-6 bg-white hover:bg-zinc-900 rounded-xl\">\n  <h3 className=\"text-zinc-900 group-hover:text-white\">Judul Kartu</h3>\n  <span className=\"opacity-0 group-hover:opacity-100 transition-opacity\">→</span>\n</div>",
+    "result": "Saat kartu disentuh mouse, teks otomatis memutih dan panah muncul halus tanpa event listener JS.",
+    "why": "Tailwind memanfaatkan selector CSS tingkat lanjut seperti .group:hover .group-hover:text-white.",
+    "howTo": [
+      "Tambahkan class group pada container induk",
+      "Gunakan modifier group-hover: atau group-focus: pada elemen anak yang ingin bereaksi",
+      "Gunakan modifier peer pada elemen input/checkbox untuk styling elemen saudara (sibling)"
+    ],
+    "usage": "Membuat micro-interactions, tooltip, dan efek kartu interaktif yang sangat responsif."
+  },
+  {
+    "category": "tailwind",
+    "title": "Kenapa penggunaan @apply berlebihan dianggap anti-pattern di Tailwind",
+    "body": "Mengabstraksi semua class utility ke file CSS dengan @apply menghilangkan keuntungan utama Tailwind.",
+    "example": "/* ❌ Hindari: Kembali ke masalah penamaan class lama */\n.btn-primary {\n  @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700;\n}\n\n/* ✔ Disarankan: Buat komponen React/Vue yang reusable */",
+    "result": "Ukuran bundle CSS membengkak dan kamu kehilangan kecepatan 'colocation' styling di markup.",
+    "why": "@apply menduplikasi aturan CSS di stylesheet dan memaksa developer memikirkan nama class baru untuk setiap variasi.",
+    "howTo": [
+      "Gunakan komponen framework (React/Vue/Blade/Svelte) untuk enkapsulasi UI berulang",
+      "Batasi @apply hanya untuk style global dasar elemen HTML di index.css (seperti tag body atau heading)",
+      "Pertahankan class utility di markup agar mudah dibaca sekilas oleh tim"
+    ],
+    "usage": "Menjaga arsitektur frontend tetap bersih, modular, dan meminimalisir ukuran file CSS production."
   }
 ]

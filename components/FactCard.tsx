@@ -74,6 +74,31 @@ const categoryMeta: Record<Fact["category"], { name: string; tagClass: string; d
     tagClass: "bg-violet-50 text-violet-800 border-violet-200/60",
     dotClass: "bg-violet-500",
   },
+  linux: {
+    name: "Linux",
+    tagClass: "bg-amber-50 text-amber-800 border-amber-200/60",
+    dotClass: "bg-amber-600",
+  },
+  git: {
+    name: "Git & GitHub",
+    tagClass: "bg-orange-50 text-orange-800 border-orange-200/60",
+    dotClass: "bg-orange-600",
+  },
+  cicd: {
+    name: "CI/CD",
+    tagClass: "bg-sky-50 text-sky-800 border-sky-200/60",
+    dotClass: "bg-sky-600",
+  },
+  docker: {
+    name: "Docker",
+    tagClass: "bg-blue-50 text-blue-800 border-blue-200/60",
+    dotClass: "bg-blue-600",
+  },
+  tailwind: {
+    name: "Tailwind CSS",
+    tagClass: "bg-teal-50 text-teal-800 border-teal-200/60",
+    dotClass: "bg-teal-500",
+  },
 };
 
 // Helper function to render furigana for Japanese text
@@ -227,6 +252,11 @@ export default function FactCard({
     "sql",
     "nosql",
     "excel",
+    "linux",
+    "git",
+    "cicd",
+    "docker",
+    "tailwind",
   ].includes(fact.category);
 
   const getExampleHeader = () => {
@@ -245,6 +275,16 @@ export default function FactCard({
         return "Kode Python";
       case "machinelearning":
         return "Pseudocode / Kode ML";
+      case "linux":
+        return "Perintah Terminal Linux";
+      case "git":
+        return "Perintah Git / Skenario";
+      case "cicd":
+        return "Konfigurasi CI/CD (YAML)";
+      case "docker":
+        return "Dockerfile / Perintah Docker";
+      case "tailwind":
+        return "Markup Class Tailwind";
       case "affirmation":
         return "Afirmasi Harian";
       case "ielts":
@@ -267,6 +307,16 @@ export default function FactCard({
       case "react":
       case "nodejs":
         return "Hasil Eksekusi";
+      case "linux":
+        return "Output Terminal / Efek";
+      case "git":
+        return "Status / Output Git";
+      case "cicd":
+        return "Hasil Eksekusi Pipeline";
+      case "docker":
+        return "Hasil Container / Image";
+      case "tailwind":
+        return "Efek Tampilan & Styling";
       case "affirmation":
         return "Refleksi & Mindset Shift";
       case "ielts":

@@ -15,6 +15,12 @@ export async function POST(req: Request) {
   let bodyJson: unknown = {};
   try {
     bodyJson = await req.json();
+    if (bodyJson && typeof bodyJson === "object" && "category" in bodyJson) {
+      const rawCat = (bodyJson as Record<string, unknown>).category;
+      if (rawCat === "git/github" || rawCat === "git-github" || rawCat === "github") (bodyJson as Record<string, unknown>).category = "git";
+      if (rawCat === "ci/cd" || rawCat === "ci-cd" || rawCat === "ci_cd") (bodyJson as Record<string, unknown>).category = "cicd";
+      if (rawCat === "tailwindcss") (bodyJson as Record<string, unknown>).category = "tailwind";
+    }
   } catch {
     bodyJson = {};
   }

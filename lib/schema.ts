@@ -13,6 +13,11 @@ export const CATEGORIES = [
   "excel",
   "ielts",
   "affirmation",
+  "linux",
+  "git",
+  "cicd",
+  "docker",
+  "tailwind",
 ] as const;
 
 export const FactSchema = z.object({

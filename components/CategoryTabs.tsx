@@ -119,6 +119,46 @@ const categories: CategoryConfig[] = [
     inactiveClass: "bg-violet-50/80 text-violet-700 border-violet-200/90 hover:bg-violet-100/80 hover:border-violet-300 shadow-sm",
     ariaLabel: "Afirmasi percaya diri dan motivasi pola pikir",
   },
+  {
+    id: "linux",
+    label: "Linux",
+    icon: "🐧",
+    activeClass: "bg-amber-600 text-white border-amber-600 shadow-md ring-2 ring-amber-500/25 scale-[1.03]",
+    inactiveClass: "bg-amber-50/80 text-amber-800 border-amber-200/90 hover:bg-amber-100/80 hover:border-amber-300 shadow-sm",
+    ariaLabel: "Fakta perintah terminal Linux dan manajemen server",
+  },
+  {
+    id: "git",
+    label: "Git & GitHub",
+    icon: "🐙",
+    activeClass: "bg-orange-600 text-white border-orange-600 shadow-md ring-2 ring-orange-500/25 scale-[1.03]",
+    inactiveClass: "bg-orange-50/80 text-orange-800 border-orange-200/90 hover:bg-orange-100/80 hover:border-orange-300 shadow-sm",
+    ariaLabel: "Fakta version control Git dan alur kerja GitHub",
+  },
+  {
+    id: "cicd",
+    label: "CI/CD",
+    icon: "🚀",
+    activeClass: "bg-sky-600 text-white border-sky-600 shadow-md ring-2 ring-sky-500/25 scale-[1.03]",
+    inactiveClass: "bg-sky-50/80 text-sky-800 border-sky-200/90 hover:bg-sky-100/80 hover:border-sky-300 shadow-sm",
+    ariaLabel: "Fakta otomatisasi pipeline CI/CD dan deployment",
+  },
+  {
+    id: "docker",
+    label: "Docker",
+    icon: "🐳",
+    activeClass: "bg-blue-600 text-white border-blue-600 shadow-md ring-2 ring-blue-500/25 scale-[1.03]",
+    inactiveClass: "bg-blue-50/80 text-blue-700 border-blue-200/90 hover:bg-blue-100/80 hover:border-blue-300 shadow-sm",
+    ariaLabel: "Fakta containerization Docker dan Docker Compose",
+  },
+  {
+    id: "tailwind",
+    label: "Tailwind CSS",
+    icon: "🌊",
+    activeClass: "bg-teal-600 text-white border-teal-600 shadow-md ring-2 ring-teal-500/25 scale-[1.03]",
+    inactiveClass: "bg-teal-50/80 text-teal-800 border-teal-200/90 hover:bg-teal-100/80 hover:border-teal-300 shadow-sm",
+    ariaLabel: "Fakta styling utility-first modern Tailwind CSS",
+  },
 ];
 
 export default function CategoryTabs({ selectedCategory, onCategorySelect }: CategoryTabsProps) {

@@ -21,6 +21,11 @@ const config: Config = {
         excel: '#047857',
         ielts: '#ea580c',
         affirmation: '#7c3aed',
+        linux: '#d97706',
+        git: '#ea580c',
+        cicd: '#0284c7',
+        docker: '#2563eb',
+        tailwind: '#0d9488',
         background: {
           light: '#f6f3ee',
           dark: '#1d1c1b',
