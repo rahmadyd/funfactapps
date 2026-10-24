@@ -26,6 +26,8 @@ const config: Config = {
         cicd: '#0284c7',
         docker: '#2563eb',
         tailwind: '#0d9488',
+        publicspeaking: '#0369a1',
+        confidence: '#e11d48',
         background: {
           light: '#f6f3ee',
           dark: '#1d1c1b',

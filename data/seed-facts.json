@@ -768,5 +768,133 @@
       "Pertahankan class utility di markup agar mudah dibaca sekilas oleh tim"
     ],
     "usage": "Menjaga arsitektur frontend tetap bersih, modular, dan meminimalisir ukuran file CSS production."
+  },
+  {
+    "category": "publicspeaking",
+    "title": "Metode PREP: Rumus 4 langkah menjawab pertanyaan spontan tanpa gagap",
+    "body": "Saat ditodong pendapat oleh bos atau audiens tanpa persiapan, otak sering nge-blank jika tidak punya kerangka berpikir.",
+    "example": "Point: 'Saya menyarankan kita tunda rilis fitur X seminggu.'\nReason: 'Karena stabilitas sistem pembayaran belum 100% teruji beban.'\nExample: 'Bulan lalu kita terburu-buru dan mendapat 40 tiket komplain pembayaran.'\nPoint: 'Jadi, penundaan seminggu akan melindungi kepuasan pengguna kita.'",
+    "result": "Jawabanmu terdengar sangat terstruktur, berbobot, dan tidak bertele-tele di mata orang penting.",
+    "why": "Struktur PREP (Point, Reason, Example, Point) memberi panduan linear pada otak sehingga tidak melompat-lompat atau mengulang kalimat.",
+    "howTo": [
+      "Mulai langsung dengan poin inti (Point), jangan berputar-putar dengan 'Mungkin... kayaknya...'",
+      "Beri 1 alasan terkuat (Reason) mengapa kamu memilih posisi tersebut",
+      "Sertakan 1 data/contoh konkret (Example) dari pengalaman atau fakta lapangan",
+      "Kunci kembali dengan mengulang poin awal secara tegas (Point)"
+    ],
+    "usage": "Menjawab pertanyaan mendadak saat rapat dewan direksi, wawancara kerja, atau sesi Q&A seminar.",
+    "quote": "Bukan apa yang kamu katakan, tapi bagaimana kamu menyusun strukturnya yang menentukan apakah idemu didengar. - Dale Carnegie"
+  },
+  {
+    "category": "publicspeaking",
+    "title": "Diplomatic Reframing: Mengganti kata 'Tapi' dengan teknik 'Yes, and...'",
+    "body": "Kata 'tapi' secara otomatis menghapus dan membatalkan kalimat apapun yang kamu katakan sebelumnya.",
+    "example": "❌ Kurang diplomatis:\n'Ide Bapak bagus, TAPI anggarannya ga bakal cukup.'\n\n✔ Diplomatis & Kolaboratif:\n'Ide Bapak sangat menarik untuk meningkatkan konversi. Agar eksekusinya optimal dengan anggaran kuartal ini, kita bisa prioritaskan fase dasarnya terlebih dahulu.'",
+    "result": "Lawan bicara tidak merasa diserang atau didebat, melainkan merasa diajak bermitra mencari solusi bersama.",
+    "why": "Kata 'tapi' memicu respon defensif (fight or flight) di amigdala lawan bicara, sedangkan framing positif mengaktifkan kolaborasi prefrontal cortex.",
+    "howTo": [
+      "Hapus kata 'tapi', 'namun', atau 'akan tetapi' saat menanggapi pendapat orang penting",
+      "Validasi niat baik atau nilai dari ide mereka terlebih dahulu",
+      "Gunakan jembatan 'Dan agar lebih optimal...' atau 'Sekaligus mempertimbangkan...'",
+      "Ajukan pertanyaan terkalibrasi: 'Bagaimana penyesuaian yang paling pas menurut Bapak?'"
+    ],
+    "usage": "Memberi masukan ke atasan, bernegosiasi dengan klien besar, atau memimpin diskusi tim lintas divisi.",
+    "quote": "Diplomasi adalah seni membiarkan orang lain mendapatkan jalan yang kamu tawarkan sembari mereka merasa itu keputusan mereka sendiri. - Sir Winston Churchill"
+  },
+  {
+    "category": "publicspeaking",
+    "title": "BLUF (Bottom Line Up Front): Cara bicara ke atasan yang selalu sibuk",
+    "body": "Orang penting dan eksekutif tidak punya waktu mendengarkan kronologi panjang 10 menit hanya untuk tahu intinya di akhir.",
+    "example": "❌ Terlalu bertele-tele:\n'Tadi pagi server sempat down karena kabel switch putus, lalu tim IT coba ganti dan vendor datang jam 11, jadi...'\n\n✔ Eksekutif (BLUF):\n'Sistem sudah normal kembali sejak pukul 11.30. Tidak ada data transaksi yang hilang. Kami sedang memasang sistem backup redundan agar insiden serupa tidak terulang besok.'",
+    "result": "Atasan langsung tenang, memahami situasi dalam 10 detik, dan menaruh respek tinggi atas efisiensi bicaramu.",
+    "why": "Piramida Minto / metode BLUF mengutamakan konklusi terlebih dahulu baru disusul bukti pendukung jika mereka meminta detail.",
+    "howTo": [
+      "Sampaikan hasil akhir / keputusan yang dibutuhkan di 2 kalimat pertama",
+      "Sertakan status risiko saat ini (apakah aman / butuh tindakan mendesak)",
+      "Tawarkan opsi tindakan solutif, jangan hanya melempar komplain atau masalah",
+      "Simpan rincian teknis sebagai lampiran jika ditanya lebih lanjut"
+    ],
+    "usage": "Update status ke C-level, mengirim email genting ke stakeholder, atau presentasi ringkas di hadapan dewan penilai.",
+    "quote": "Bicaralah agar orang lain senang mendengarmu. Dengarkanlah agar orang lain senang berbicara denganmu. - Chris Voss"
+  },
+  {
+    "category": "publicspeaking",
+    "title": "The Strategic Pause: Hening 2 detik yang membuatmu terdengar 10x lebih bijak",
+    "body": "Kebanyakan orang takut pada keheningan saat bicara, sehingga mengisinya dengan 'ummm', 'anu', atau 'kayak gini'.",
+    "example": "❌ Penuh filler words:\n'Menurut saya sih, eeek... target kita ini, anu... kayaknya kurang realistis, ummm... ya gitu.'\n\n✔ Berwibawa dengan jeda hening:\n'Target kita sangat ambisius. [Jeda hening 2 detik sambil tatap mata] Namun dengan kapasitas tim saat ini, ada risiko bottleneck di fase testing.'",
+    "result": "Audiens otomatis memperhatikan karena perubahan ritme suara, dan kamu terlihat tenang, percaya diri, serta penuh kendali.",
+    "why": "Jeda hening memberi waktu bagi otakmu untuk memformulasikan kata berikutnya tanpa refleks filler words.",
+    "howTo": [
+      "Tarik napas lembut melalui hidung saat ingin mengucapkan 'ummm' atau 'anu'",
+      "Gunakan jeda hening tepat sebelum poin terpenting (untuk membangun antisipasi)",
+      "Gunakan jeda hening tepat setelah angka atau data penting (agar audiens sempat mencernanya)",
+      "Jaga kontak mata tetap tenang saat terdiam, jangan melirik ke atas atau ke bawah"
+    ],
+    "usage": "Pidato di depan podium, mempresentasikan slide anggaran, atau menjawab pertanyaan kritis audiens.",
+    "quote": "Kata yang tepat bisa sangat efektif, namun tidak ada kata yang seefektif jeda hening yang ditempatkan secara tepat. - Mark Twain"
+  },
+  {
+    "category": "confidence",
+    "title": "Physiological Sigh: Trik pernapasan 30 detik untuk mematikan demam panggung",
+    "body": "Saat gugup di hadapan orang penting, detak jantungmu meningkat dan paru-paru menumpuk karbon dioksida berlebih.",
+    "example": "Latihan sebelum melangkah ke ruangan:\n1. Tarik napas dalam lewat hidung (2 detik)\n2. Tanpa menghembuskan, tarik napas pendek lagi sekali lagi lewat hidung untuk mengisi sisa alveoli (1 detik)\n3. Hembuskan perlahan dan panjang lewat mulut (5-6 detik)\n4. Ulangi 2-3 kali.",
+    "result": "Detak jantung melambat secara fisiologis, tremor tangan mereda, dan rasa panik hilang dalam hitungan detik.",
+    "why": "Penelitian neurosains Stanford (Dr. Andrew Huberman) membuktikan physiological sigh merangsang saraf vagus untuk mengaktifkan sistem saraf parasimpatis seketika.",
+    "howTo": [
+      "Lakukan trik ini 1 menit sebelum kamu dipanggil ke panggung atau masuk ruang interview",
+      "Pastikan tarikan napas kedua adalah 'sniff' pendek untuk membuka kantung udara alveoli",
+      "Hembuskan napas dua kali lebih lama daripada saat menarik napas",
+      "Kombinasikan dengan meluruskan tulang belakang dan merilekskan rahang"
+    ],
+    "usage": "Mengatasi deg-degan hebat sebelum presentasi besar, negosiasi gaji, atau berbicara di depan pejabat publik.",
+    "quote": "Keberanian bukanlah ketiadaan rasa takut, melainkan kesadaran bahwa ada hal lain yang jauh lebih penting daripada rasa takut itu sendiri. - Ambrose Redmoon"
+  },
+  {
+    "category": "confidence",
+    "title": "The Spotlight Effect: Orang lain tidak sefokus itu memperhatikan kegugupanmu",
+    "body": "Kita sering merasa semua mata meneliti setiap salah kata, getaran suara, atau keringat dingin kita.",
+    "example": "Eksperimen psikologi sosial Thomas Gilovich membuktikan peserta memperkirakan 50% orang di ruangan memperhatikan ketidaksempurnaannya, padahal secara riil kurang dari 20% yang menyadarinya.",
+    "result": "Beban mental berkurang drastis karena kamu sadar audiens sebenarnya lebih fokus pada isi pesan daripada menilaimu.",
+    "why": "Sebagai manusia, kita adalah pusat dunia kita sendiri, sehingga secara keliru kita mengasumsikan orang lain memperhatikan kita seintens kita memperhatikan diri sendiri.",
+    "howTo": [
+      "Saat suara bergetar sedikit, jangan minta maaf atau panik; 90% audiens tidak menyadarinya",
+      "Alihkan fokus dari 'Bagaimana penilaian orang padaku?' menjadi 'Bagaimana pesanku bisa membantu mereka?'",
+      "Ingat bahwa audiens sebenarnya menginginkan kamu sukses membawakan presentasi tersebut",
+      "Tertawakan kesalahan kecil secara santai alih-alih mencoba menutup-nutupinya dengan panik"
+    ],
+    "usage": "Meredakan kecemasan sosial saat masuk ke ruangan penuh orang asing, seminar, atau networking dinner.",
+    "quote": "Kamu tidak akan terlalu khawatir tentang apa yang orang lain pikirkan tentangmu jika kamu menyadari betapa jarangnya mereka memikirkanmu. - Eleanor Roosevelt"
+  },
+  {
+    "category": "confidence",
+    "title": "Hentikan 'Over-Apologizing': Ganti kata maaf dengan terima kasih",
+    "body": "Terlalu sering meminta maaf untuk hal-hal sepele secara bawah sadar merendahkan wibawa dan posisi tawarmu.",
+    "example": "❌ Menurunkan status diri:\n'Maaf banget ya saya telat 5 menit, maaf merepotkan...'\n\n✔ Menunjukkan rasa hormat & percaya diri:\n'Terima kasih banyak sudah berkenan menunggu. Mari kita mulai pembahasannya.'\n\n❌ 'Maaf kalau penjelasan saya agak membingungkan...'\n✔ 'Terima kasih atas pertanyaannya. Bagian mana yang ingin kita perdalam bersama?'",
+    "result": "Kamu tidak terdengar bersalah atau rendah diri, dan lawan bicara merasa diapresiasi kesabarannya.",
+    "why": "Kata 'maaf' menempatkanmu sebagai pihak yang berutang kesalahan, sedangkan 'terima kasih' mengakui kontribusi orang lain dengan martabat setara.",
+    "howTo": [
+      "Hanya katakan maaf jika kamu benar-benar melakukan pelanggaran etika atau kesalahan fatal yang merugikan",
+      "Ubah kebiasaan otomatis meminta maaf karena 'mengambil waktu orang lain'",
+      "Sampaikan apresiasi positif terhadap fleksibilitas atau bantuan rekan kerja",
+      "Tegakkan kontak mata saat mengucapkan terima kasih"
+    ],
+    "usage": "Mengirim email revisi kerja, memulai rapat yang sempat tertunda, atau merespon masukan kritis dari klien.",
+    "quote": "Tidak ada seorang pun yang bisa membuatmu merasa rendah diri tanpa seizin dirimu sendiri. - Eleanor Roosevelt"
+  },
+  {
+    "category": "confidence",
+    "title": "Low Vocal Register: Resonansi dada yang otomatis memancarkan ketenangan",
+    "body": "Saat cemas, pita suara menegang sehingga nada suara meninggi (pitch naik) dan terkesan ragu-ragu di akhir kalimat.",
+    "example": "Latihan vokal 1 menit:\n1. Letakkan telapak tanganmu di tengah dada.\n2. Ucapkan 'Mmm-hmmm' dengan rileks sampai kamu merasakan getaran beresonansi di telapak tanganmu.\n3. Ucapkan kalimat pembukamu dari rongga getaran dada tersebut, bukan dari tenggorokan atas.\n4. Turunkan intonasi di kata terakhir (downward inflection).",
+    "result": "Suaramu terdengar hangat, berwibawa, mantap, dan tidak terdengar cempreng atau gemetar.",
+    "why": "Secara evolusi biologis, frekuensi vokal yang lebih stabil dan beresonansi di dada diasosiasikan oleh otak mamalia dengan ketenangan, kedewasaan, dan dominasi non-agresif.",
+    "howTo": [
+      "Hindari 'uptalk' (menaikkan intonasi di akhir kalimat seperti orang bertanya saat kamu sedang membuat pernyataan)",
+      "Bicara sedikit lebih lambat dari tempo obrolan biasamu (kurangi tempo 15%)",
+      "Minum air bersuhu ruang, hindari kopi dingin atau minuman es sebelum berbicara",
+      "Buang napas terlebih dahulu sebelum mulai berbicara agar pita suara tidak tegang"
+    ],
+    "usage": "Membuka sesi presentasi, memimpin rapat penting, atau berbicara di hadapan orang yang berkedudukan lebih tinggi.",
+    "quote": "Ketenangan adalah bentuk kekuatan tertinggi. Pikiran yang damai dan suara yang tenang menguasai ruangan. - Marcus Aurelius"
   }
 ]

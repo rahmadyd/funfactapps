@@ -251,6 +251,36 @@ export const tailwindSubtopics = [
   "Gradient, backdrop-blur, dan Glassmorphism utilities"
 ];
 
+export const publicspeakingSubtopics = [
+  "Metode PREP (Point, Reason, Example, Point) untuk menjawab pertanyaan spontan tanpa gugup",
+  "Diplomatic Reframing: Mengubah kata 'Tapi' menjadi 'Yes, and...' dalam negosiasi penting",
+  "Softening Words & Hedging: Cara menolak atau memberi kritik ke atasan/klien secara elegan",
+  "BLUF (Bottom Line Up Front) & Minto Pyramid: Cara presentasi to-the-point ke level eksekutif",
+  "The Strategic Pause: Mengganti filler words ('ummm', 'anu') dengan jeda hening berwibawa 2 detik",
+  "Bridging Technique: Cara elegan membelokkan pertanyaan menjebak atau tidak relevan",
+  "Active Listening & Paraphrasing: Mengulang esensi lawan bicara sebelum menyampaikan sudut pandang",
+  "Teknik Calibrated Questions (Chris Voss): Bertanya dengan 'Bagaimana' / 'Apa', bukan 'Kenapa'",
+  "Menyampaikan Kabar Buruk atau Delay Proyek secara solutif tanpa defensif",
+  "Vocal Cadence & Downward Inflection: Menurunkan nada di akhir kalimat agar terdengar mantap",
+  "Struktur Pitching Ide: Hook, Problem, Solution, Impact",
+  "Mengelola Audiens Skeptis atau Dominan dengan validasi emosional terlebih dahulu"
+];
+
+export const confidenceSubtopics = [
+  "Physiological Sigh: Trik pernapasan 30 detik untuk menetralkan demam panggung seketika",
+  "The Spotlight Effect: Mengapa orang lain tidak memperhatikan kelemahanmu sedalam dugaanmu",
+  "Eliminasi 'Over-Apologizing': Mengganti 'Maaf merepotkan' menjadi 'Terima kasih atas bantuannya'",
+  "Aturan Kontak Mata 50/70: Menatap 50% saat berbicara dan 70% saat mendengarkan untuk karisma alami",
+  "Anxiety Reappraisal: Mengubah framing otak dari 'Saya gugup' menjadi 'Saya bersemangat'",
+  "Berani Mengatakan 'Saya belum memiliki data itu, saya akan cari tahu dan update Anda' dengan tenang",
+  "Assertive Communication: Perbedaan tegas (asertif) vs pasif vs agresif di lingkungan kerja",
+  "Power Posing & Postur Terbuka: Membuka bahu untuk menurunkan kadar hormon stres (kortisol)",
+  "Resonansi Suara Dada (Chest Voice) agar ucapan terdengar tenang dan tidak bergetar",
+  "Aturan 5 Detik Melompat Bicara: Mengambil ruang bicara di awal pertemuan sebelum overthinking",
+  "Melepaskan People Pleasing: Menyadari rasa hormat didapat dari batasan yang jelas, bukan kepatuhan",
+  "Mengikis Impostor Syndrome: Mengakui keberhasilan sebagai hasil usaha nyata, bukan semata faktor hoki"
+];
+
 export function pickCategory(requestedCategory: string): Category {
   if (requestedCategory === "mixed") {
     return CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
@@ -294,6 +324,10 @@ export function getRandomSubtopic(category: Category): string {
       return dockerSubtopics[Math.floor(Math.random() * dockerSubtopics.length)];
     case "tailwind":
       return tailwindSubtopics[Math.floor(Math.random() * tailwindSubtopics.length)];
+    case "publicspeaking":
+      return publicspeakingSubtopics[Math.floor(Math.random() * publicspeakingSubtopics.length)];
+    case "confidence":
+      return confidenceSubtopics[Math.floor(Math.random() * confidenceSubtopics.length)];
   }
 }
 
@@ -320,7 +354,7 @@ Skema JSON:
   "why": string,
   "howTo": [string, string, string],
   "usage": string,
-  "quote": string (optional, terutama untuk kategori design & affirmation)
+  "quote": string (optional, terutama untuk kategori design, affirmation, publicspeaking, & confidence)
 }`;
 
   const categorySpecificRules: Record<Category, string> = {
@@ -340,7 +374,9 @@ Skema JSON:
     git: "example berisi perintah Git (maks 3-5 baris) atau skenario branch/commit. result berisi status output git atau efek pada commit graph. Fokus pada trik praktis Git dan workflow kolaborasi GitHub.",
     cicd: "example berisi potongan konfigurasi pipeline YAML (misal GitHub Actions, maks 6 baris) atau alur testing/deploy. result berisi efek pipeline atau status build. Jelaskan nilai praktis otomasi ini dalam siklus rilis.",
     docker: "example berisi potongan Dockerfile atau perintah Docker CLI ringkas (maks 5-6 baris). result berisi output build, eksekusi container, atau hasil optimasi image. Fokus pada efisiensi container dan isolasi aplikasi.",
-    tailwind: "example berisi markup HTML/JSX dengan class utility Tailwind yang ringkas dan elegan (maks 5-6 baris). result berisi visualisasi styling atau efek class yang dihasilkan. Tunjukkan trik utility classes yang bersih."
+    tailwind: "example berisi markup HTML/JSX dengan class utility Tailwind yang ringkas dan elegan (maks 5-6 baris). result berisi visualisasi styling atau efek class yang dihasilkan. Tunjukkan trik utility classes yang bersih.",
+    publicspeaking: "Fokus pada teknik public speaking, seni diplomasi berbicara dengan orang penting (atasan, stakeholder, klien besar, audiens). example berisi contoh skenario dialog nyata: perbandingan kalimat yang kurang diplomatis/defensif vs kalimat alternatif yang diplomatis, tenang, dan berwibawa. result berisi respon positif atau dampak psikologis dari lawan bicara. SELALU sertakan kutipan inspiratif di field 'quote' dari komunikator, negosiator, atau pemimpin terkemuka (misal: Dale Carnegie, Chris Voss, Winston Churchill, dsb) dengan format: 'Kutipan' - Nama Tokoh.",
+    confidence: "Fokus pada pembentukan rasa percaya diri, keberanian berbicara di depan umum, membabat rasa minder, mengatasi demam panggung, dan bahasa tubuh mantap. example berisi teknik tindakan fisik atau latihan mindset konkret yang langsung bisa diterapkan. result berisi efek mental dan dampak nyata dalam interaksi. SELALU sertakan kutipan inspiratif di field 'quote' tentang keberanian dan percaya diri dari tokoh terkemuka (misal: Eleanor Roosevelt, Marcus Aurelius, Amy Cuddy, Brene Brown, dsb) dengan format: 'Kutipan' - Nama Tokoh."
   };
 
   const avoidText = avoid.length > 0 ? avoid.join("; ") : "tidak ada";

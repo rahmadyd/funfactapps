@@ -159,6 +159,22 @@ const categories: CategoryConfig[] = [
     inactiveClass: "bg-teal-50/80 text-teal-800 border-teal-200/90 hover:bg-teal-100/80 hover:border-teal-300 shadow-sm",
     ariaLabel: "Fakta styling utility-first modern Tailwind CSS",
   },
+  {
+    id: "publicspeaking",
+    label: "Public Speaking",
+    icon: "🎙️",
+    activeClass: "bg-sky-700 text-white border-sky-700 shadow-md ring-2 ring-sky-600/25 scale-[1.03]",
+    inactiveClass: "bg-sky-50/80 text-sky-800 border-sky-200/90 hover:bg-sky-100/80 hover:border-sky-300 shadow-sm",
+    ariaLabel: "Fakta teknik public speaking, komunikasi diplomatis, dan presentasi",
+  },
+  {
+    id: "confidence",
+    label: "Percaya Diri",
+    icon: "🦁",
+    activeClass: "bg-rose-600 text-white border-rose-600 shadow-md ring-2 ring-rose-500/25 scale-[1.03]",
+    inactiveClass: "bg-rose-50/80 text-rose-800 border-rose-200/90 hover:bg-rose-100/80 hover:border-rose-300 shadow-sm",
+    ariaLabel: "Fakta membangun rasa percaya diri, keberanian berbicara, dan mengatasi grogi",
+  },
 ];
 
 export default function CategoryTabs({ selectedCategory, onCategorySelect }: CategoryTabsProps) {

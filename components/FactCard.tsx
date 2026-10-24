@@ -99,6 +99,16 @@ const categoryMeta: Record<Fact["category"], { name: string; tagClass: string; d
     tagClass: "bg-teal-50 text-teal-800 border-teal-200/60",
     dotClass: "bg-teal-500",
   },
+  publicspeaking: {
+    name: "Public Speaking",
+    tagClass: "bg-sky-50 text-sky-800 border-sky-200/60",
+    dotClass: "bg-sky-600",
+  },
+  confidence: {
+    name: "Percaya Diri",
+    tagClass: "bg-rose-50 text-rose-800 border-rose-200/60",
+    dotClass: "bg-rose-500",
+  },
 };
 
 // Helper function to render furigana for Japanese text
@@ -287,6 +297,10 @@ export default function FactCard({
         return "Markup Class Tailwind";
       case "affirmation":
         return "Afirmasi Harian";
+      case "publicspeaking":
+        return "Contoh Frasa & Trik Diplomatis";
+      case "confidence":
+        return "Latihan & Pola Tindakan";
       case "ielts":
       case "toefl":
         return "Contoh Frasa / Kalimat";
@@ -319,6 +333,10 @@ export default function FactCard({
         return "Efek Tampilan & Styling";
       case "affirmation":
         return "Refleksi & Mindset Shift";
+      case "publicspeaking":
+        return "Dampak Diplomatis & Respon Lawan Bicara";
+      case "confidence":
+        return "Efek Psikologis & Dampak Nyata";
       case "ielts":
       case "toefl":
         return "Arti & Analisa";

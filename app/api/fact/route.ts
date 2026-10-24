@@ -20,6 +20,8 @@ export async function POST(req: Request) {
       if (rawCat === "git/github" || rawCat === "git-github" || rawCat === "github") (bodyJson as Record<string, unknown>).category = "git";
       if (rawCat === "ci/cd" || rawCat === "ci-cd" || rawCat === "ci_cd") (bodyJson as Record<string, unknown>).category = "cicd";
       if (rawCat === "tailwindcss") (bodyJson as Record<string, unknown>).category = "tailwind";
+      if (rawCat === "publicspeaking" || rawCat === "public-speaking" || rawCat === "public_speaking" || rawCat === "speaking" || rawCat === "diplomasi") (bodyJson as Record<string, unknown>).category = "publicspeaking";
+      if (rawCat === "confidence" || rawCat === "percayadiri" || rawCat === "percaya-diri" || rawCat === "percaya_diri" || rawCat === "self-confidence") (bodyJson as Record<string, unknown>).category = "confidence";
     }
   } catch {
     bodyJson = {};

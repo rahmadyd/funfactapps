@@ -18,6 +18,8 @@ export const CATEGORIES = [
   "cicd",
   "docker",
   "tailwind",
+  "publicspeaking",
+  "confidence",
 ] as const;
 
 export const FactSchema = z.object({
@@ -29,7 +31,7 @@ export const FactSchema = z.object({
   why: z.string(),
   howTo: z.array(z.string()).min(2).max(5),
   usage: z.string(),
-  quote: z.string().optional(), // Optional quote, mainly for design & affirmation
+  quote: z.string().optional(), // Optional quote for design, affirmation, publicspeaking & confidence
 });
 
 export type Fact = z.infer<typeof FactSchema>;

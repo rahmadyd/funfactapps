@@ -28,6 +28,8 @@ const categoryDotColor: Record<Fact["category"], string> = {
   cicd: "bg-sky-600",
   docker: "bg-blue-600",
   tailwind: "bg-teal-500",
+  publicspeaking: "bg-sky-600",
+  confidence: "bg-rose-500",
 };
 
 const categoryNames: Record<Fact["category"], string> = {
@@ -48,6 +50,8 @@ const categoryNames: Record<Fact["category"], string> = {
   cicd: "CI/CD",
   docker: "Docker",
   tailwind: "Tailwind",
+  publicspeaking: "Public Speaking",
+  confidence: "Percaya Diri",
 };
 
 export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdate }: FavoritesProps) {
