@@ -24,12 +24,12 @@ export const CATEGORIES = [
 
 export const FactSchema = z.object({
   category: z.enum(CATEGORIES),
-  title: z.string().max(120),
+  title: z.string().max(250),
   body: z.string(),
   example: z.string(),
   result: z.string(),
   why: z.string(),
-  howTo: z.array(z.string()).min(2).max(5),
+  howTo: z.array(z.string()).min(1).max(8),
   usage: z.string(),
   quote: z.string().optional(), // Optional quote for design, affirmation, publicspeaking & confidence
 });

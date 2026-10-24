@@ -48,7 +48,7 @@ export async function POST(req: Request) {
           model: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
           messages: buildMessages(cat, avoid),
           temperature: 0.9,
-          max_tokens: 900,
+          max_tokens: 1500,
           response_format: { type: "json_object" },
         }),
         signal: AbortSignal.timeout(15000),
