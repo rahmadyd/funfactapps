@@ -298,9 +298,9 @@ export default function FactCard({
       case "affirmation":
         return "Afirmasi Harian";
       case "publicspeaking":
-        return "Contoh Frasa & Trik Diplomatis";
+        return "Script Percakapan & Cara Praktik Langsung";
       case "confidence":
-        return "Latihan & Pola Tindakan";
+        return "Latihan Aksi & Teknik Fisik/Mental";
       case "ielts":
       case "toefl":
         return "Contoh Frasa / Kalimat";
@@ -334,14 +334,46 @@ export default function FactCard({
       case "affirmation":
         return "Refleksi & Mindset Shift";
       case "publicspeaking":
-        return "Dampak Diplomatis & Respon Lawan Bicara";
+        return "Respon Lawan Bicara & Efek Diplomatis";
       case "confidence":
-        return "Efek Psikologis & Dampak Nyata";
+        return "Sensasi Fisik & Hasil Latihan";
       case "ielts":
       case "toefl":
         return "Arti & Analisa";
       default:
         return "Arti / Hasil";
+    }
+  };
+
+  const getWhyHeader = () => {
+    switch (fact.category) {
+      case "publicspeaking":
+        return "Kenapa Trik Ini Meluluhkan Lawan Bicara?";
+      case "confidence":
+        return "Mekanisme Otak & Tubuh di Balik Latihan Ini";
+      default:
+        return "Mengapa Bisa Begini?";
+    }
+  };
+
+  const getHowToHeader = () => {
+    switch (fact.category) {
+      case "publicspeaking":
+        return "Latihan Harian Agar Spontan Bisa (Action Drills)";
+      case "confidence":
+        return "Langkah Latihan Harian Agar Terbiasa";
+      default:
+        return "Langkah Praktis";
+    }
+  };
+
+  const getUsageHeader = () => {
+    switch (fact.category) {
+      case "publicspeaking":
+      case "confidence":
+        return "Kapan Harus Dipakai";
+      default:
+        return "Penerapan";
     }
   };
 
@@ -539,7 +571,7 @@ export default function FactCard({
             <div className="p-4 bg-zinc-50/70 rounded-xl border border-zinc-200">
               <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2">
                 <span className="text-zinc-500">❓</span>
-                <span>Mengapa Bisa Begini?</span>
+                <span>{getWhyHeader()}</span>
               </div>
               <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed">
                 {fact.why}
@@ -550,7 +582,7 @@ export default function FactCard({
             <div className="p-4 bg-zinc-50/70 rounded-xl border border-zinc-200">
               <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 uppercase tracking-wider mb-2.5">
                 <span className="text-zinc-500">⚡</span>
-                <span>Langkah Praktis</span>
+                <span>{getHowToHeader()}</span>
               </div>
               <ul className="space-y-2">
                 {fact.howTo.map((step, idx) => (
@@ -581,7 +613,7 @@ export default function FactCard({
             {/* Real World Scenario */}
             <div className="p-3 bg-white rounded-lg border border-zinc-200 text-xs flex items-start gap-2 text-zinc-600">
               <span className="font-semibold text-zinc-900 uppercase text-[10px] tracking-wide px-1.5 py-0.5 bg-zinc-100 rounded flex-shrink-0">
-                Penerapan
+                {getUsageHeader()}
               </span>
               <span className="leading-relaxed">{fact.usage}</span>
             </div>

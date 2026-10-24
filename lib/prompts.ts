@@ -252,33 +252,33 @@ export const tailwindSubtopics = [
 ];
 
 export const publicspeakingSubtopics = [
-  "Metode PREP (Point, Reason, Example, Point) untuk menjawab pertanyaan spontan tanpa gugup",
-  "Diplomatic Reframing: Mengubah kata 'Tapi' menjadi 'Yes, and...' dalam negosiasi penting",
-  "Softening Words & Hedging: Cara menolak atau memberi kritik ke atasan/klien secara elegan",
-  "BLUF (Bottom Line Up Front) & Minto Pyramid: Cara presentasi to-the-point ke level eksekutif",
-  "The Strategic Pause: Mengganti filler words ('ummm', 'anu') dengan jeda hening berwibawa 2 detik",
-  "Bridging Technique: Cara elegan membelokkan pertanyaan menjebak atau tidak relevan",
-  "Active Listening & Paraphrasing: Mengulang esensi lawan bicara sebelum menyampaikan sudut pandang",
-  "Teknik Calibrated Questions (Chris Voss): Bertanya dengan 'Bagaimana' / 'Apa', bukan 'Kenapa'",
-  "Menyampaikan Kabar Buruk atau Delay Proyek secara solutif tanpa defensif",
-  "Vocal Cadence & Downward Inflection: Menurunkan nada di akhir kalimat agar terdengar mantap",
-  "Struktur Pitching Ide: Hook, Problem, Solution, Impact",
-  "Mengelola Audiens Skeptis atau Dominan dengan validasi emosional terlebih dahulu"
+  "Cara Menolak Permintaan Atasan/Orang Penting Tanpa Terkesan Membangkang (Diplomatic Cushion)",
+  "Cara Menjawab Spontan saat Ditodong Bicara Mendadak di Depan Rapat (Metode Jam 3 Arah / PREP)",
+  "Cara Bicara Diplomatis saat Menegur atau Tidak Sependapat dengan Pimpinan Tanpa Emosional",
+  "Cara Menghilangkan Gagap dan Kebiasaan 'Eee... / Ummm...' saat Berbicara (The 2-Second Lock)",
+  "Cara Mengatasi Otak Blank / Lupa Materi di Tengah Panggung atau Rapat Tanpa Panik",
+  "Cara Menyampaikan Kabar Buruk atau Kesalahan Kerja ke Klien Besar Secara Solutif & Berwibawa",
+  "Cara Negosiasi Gaji atau Anggaran Menggunakan Teknik Calibrated Questions (Kata Apa & Bagaimana)",
+  "Cara Menghadapi Orang Penting yang Sedang Emosi / Skeptis dengan Validasi Emosional Taktis",
+  "Cara Menghindari Jebakan 'Terlalu Banyak Minta Maaf' yang Bikin Kamu Terlihat Lemah & Ragu",
+  "Cara Mengatur Tempo dan Intonasi Suara Berat (Chest Voice) Agar Tidak Cempreng atau Gugup",
+  "Cara Membuka Presentasi atau Obrolan dalam 15 Detik Pertama Agar Orang Penting Langsung Menyimak",
+  "Cara Membelokkan Pertanyaan Menjebak atau Bersifat Menyerang Menggunakan Bridging Technique"
 ];
 
 export const confidenceSubtopics = [
-  "Physiological Sigh: Trik pernapasan 30 detik untuk menetralkan demam panggung seketika",
-  "The Spotlight Effect: Mengapa orang lain tidak memperhatikan kelemahanmu sedalam dugaanmu",
-  "Eliminasi 'Over-Apologizing': Mengganti 'Maaf merepotkan' menjadi 'Terima kasih atas bantuannya'",
-  "Aturan Kontak Mata 50/70: Menatap 50% saat berbicara dan 70% saat mendengarkan untuk karisma alami",
-  "Anxiety Reappraisal: Mengubah framing otak dari 'Saya gugup' menjadi 'Saya bersemangat'",
-  "Berani Mengatakan 'Saya belum memiliki data itu, saya akan cari tahu dan update Anda' dengan tenang",
-  "Assertive Communication: Perbedaan tegas (asertif) vs pasif vs agresif di lingkungan kerja",
-  "Power Posing & Postur Terbuka: Membuka bahu untuk menurunkan kadar hormon stres (kortisol)",
-  "Resonansi Suara Dada (Chest Voice) agar ucapan terdengar tenang dan tidak bergetar",
-  "Aturan 5 Detik Melompat Bicara: Mengambil ruang bicara di awal pertemuan sebelum overthinking",
-  "Melepaskan People Pleasing: Menyadari rasa hormat didapat dari batasan yang jelas, bukan kepatuhan",
-  "Mengikis Impostor Syndrome: Mengakui keberhasilan sebagai hasil usaha nyata, bukan semata faktor hoki"
+  "Cara Mematikan Demam Panggung & Jantung Berdebar dalam 30 Detik (Metode Physiological Sigh)",
+  "Cara Menghancurkan Rasa Minder saat Duduk di Meja Rapat Berisi Orang-Orang Berpengaruh",
+  "Cara Menghilangkan Rasa Malu & Takut Dihakimi Semua Orang (Menghapus Spotlight Effect)",
+  "Cara Melatih Kontak Mata yang Memancarkan Karisma Tanpa Menantang (Metode Segitiga Wajah)",
+  "Cara Melatih Postur Tubuh Terbuka yang Otomatis Menurunkan Hormon Stres & Menaikkan Nyali",
+  "Cara Berani Mengambil Ruang Bicara Pertama Kali di 5 Menit Awal Diskusi (Aturan 5 Detik Melompat)",
+  "Cara Mengubah Rasa Cemas Menjadi Energi Percaya Diri Membara (Anxiety Reappraisal)",
+  "Cara Berani Mengatakan 'Saya Belum Tahu' dengan Tenang Tanpa Terlihat Bodoh di Hadapan Atasan",
+  "Cara Menghilangkan Kebiasaan 'People Pleasing' yang Membuatmu Sulit Bersikap Asertif & Berwibawa",
+  "Cara Melatih Suara Terdengar Tenang dan Berbobot Melalui Latihan Dengung Dada (Chest Resonance)",
+  "Cara Membongkar Jebakan Impostor Syndrome agar Kamu Merasa Layak Berbicara Sejajar dengan Siapapun",
+  "Cara Menghadapi Tatapan Dingin atau Diamnya Audiens Tanpa Kehilangan Kepercayaan Diri"
 ];
 
 export function pickCategory(requestedCategory: string): Category {
@@ -375,8 +375,8 @@ Skema JSON:
     cicd: "example berisi potongan konfigurasi pipeline YAML (misal GitHub Actions, maks 6 baris) atau alur testing/deploy. result berisi efek pipeline atau status build. Jelaskan nilai praktis otomasi ini dalam siklus rilis.",
     docker: "example berisi potongan Dockerfile atau perintah Docker CLI ringkas (maks 5-6 baris). result berisi output build, eksekusi container, atau hasil optimasi image. Fokus pada efisiensi container dan isolasi aplikasi.",
     tailwind: "example berisi markup HTML/JSX dengan class utility Tailwind yang ringkas dan elegan (maks 5-6 baris). result berisi visualisasi styling atau efek class yang dihasilkan. Tunjukkan trik utility classes yang bersih.",
-    publicspeaking: "Fokus pada teknik public speaking, seni diplomasi berbicara dengan orang penting (atasan, stakeholder, klien besar, audiens). example berisi contoh skenario dialog nyata: perbandingan kalimat yang kurang diplomatis/defensif vs kalimat alternatif yang diplomatis, tenang, dan berwibawa. result berisi respon positif atau dampak psikologis dari lawan bicara. SELALU sertakan kutipan inspiratif di field 'quote' dari komunikator, negosiator, atau pemimpin terkemuka (misal: Dale Carnegie, Chris Voss, Winston Churchill, dsb) dengan format: 'Kutipan' - Nama Tokoh.",
-    confidence: "Fokus pada pembentukan rasa percaya diri, keberanian berbicara di depan umum, membabat rasa minder, mengatasi demam panggung, dan bahasa tubuh mantap. example berisi teknik tindakan fisik atau latihan mindset konkret yang langsung bisa diterapkan. result berisi efek mental dan dampak nyata dalam interaksi. SELALU sertakan kutipan inspiratif di field 'quote' tentang keberanian dan percaya diri dari tokoh terkemuka (misal: Eleanor Roosevelt, Marcus Aurelius, Amy Cuddy, Brene Brown, dsb) dengan format: 'Kutipan' - Nama Tokoh."
+    publicspeaking: "FOKUS TOTAL pada PANDUAN PRAKTIK & CARA BISA JAGO berbicara di depan umum serta diplomatis ke orang penting (atasan, stakeholder, klien, audiens). BUKAN sekadar trivia atau teori! title harus berupa 'Cara/Trik Praktis...' yang solutif. body berisi formula strategi psikologis/komunikasinya. example WAJIB berisi SCRIPT KATA-DEMI-KATA (word-for-word script): tampilkan perbandingan jelas antara apa yang salah/hindari (❌ Hindari) vs kalimat persis yang elegan, berwibawa & diplomatis untuk diucapkan (✔ Script Diplomatis). result berisi respon positif atau dampak psikologis dari lawan bicara saat mendengar script tersebut. why menjelaskan alasan psikologis kenapa kalimat itu meluluhkan lawan bicara. howTo berisi 3-4 langkah latihan harian konkret (actionable drills) agar lidah dan otak terlatih spontan. usage berisi skenario kritis kapan trik ini harus dikeluarkan. SELALU sertakan quote komunikasi dari tokoh negosiasi/komunikasi terkemuka di field 'quote'.",
+    confidence: "FOKUS TOTAL pada LATIHAN FISIK & MENTAL AGAR BENAR-BENAR PERCAYA DIRI dan berani tampil di depan siapa saja. BUKAN sekadar motivasi kosong! title harus berupa panduan latihan aksi ('Cara Melatih/Menghilangkan...'). body berisi penjelasan singkat mekanisme psikologis tubuh/otak. example berisi latihan aksi fisik/mental konkret yang bisa dicoba detik ini juga (misal pola napas, postur tubuh, resonansi vokal, atau kalimat afirmasi internal). result berisi sensasi fisik dan dampak mental yang langsung terasa setelah latihan. why menjelaskan mekanisme neurobiologis/psikologisnya. howTo berisi 3-4 langkah aksi latihan harian terukur. usage berisi situasi kritis kapan teknik ini wajib dipraktikkan. SELALU sertakan quote ketegaran/keberanian di field 'quote'."
   };
 
   const avoidText = avoid.length > 0 ? avoid.join("; ") : "tidak ada";
