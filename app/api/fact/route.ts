@@ -15,6 +15,26 @@ const FALLBACK_MODELS = [
   "llama-3.1-8b-instant",
 ];
 
+function cleanApiKey(raw?: string): string {
+  if (!raw) return "";
+  let key = raw.trim();
+  if (key.includes("gsk_")) {
+    const match = key.match(/gsk_[A-Za-z0-9_-]+/);
+    if (match) key = match[0];
+  }
+  return key.trim();
+}
+
+function cleanModel(raw?: string): string {
+  if (!raw) return FALLBACK_MODELS[0];
+  let m = raw.trim();
+  if (m.includes("GROQ_MODEL")) {
+    const line = m.split("\n").find((l) => l.includes("GROQ_MODEL")) || "";
+    m = line.replace(/GROQ_MODEL[:=\s]+/i, "").trim();
+  }
+  return m || FALLBACK_MODELS[0];
+}
+
 const ReqSchema = z.object({
   category: z.enum([...CATEGORIES, "mixed"]).default("mixed"),
   avoid: z.array(z.string()).default([]),
@@ -25,7 +45,7 @@ const ReqSchema = z.object({
  * Cek apakah Groq API key terkonfigurasi dan model tersedia.
  */
 export async function GET() {
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = cleanApiKey(process.env.GROQ_API_KEY);
   const isKeyValid =
     apiKey &&
     !apiKey.includes("isi_dengan_kunci") &&
@@ -57,7 +77,7 @@ export async function GET() {
     status: "ok",
     groqConfigured: !!isKeyValid,
     groqStatus,
-    configuredModel: process.env.GROQ_MODEL || FALLBACK_MODELS[0],
+    configuredModel: cleanModel(process.env.GROQ_MODEL),
     availableModels: availableModels.length > 0 ? availableModels : "run GET /api/fact to check",
     seedCategories: Array.from(new Set((seed as any[]).map((f) => f.category))),
     seedTotal: (seed as any[]).length,
@@ -107,7 +127,7 @@ export async function POST(req: Request) {
   const avoid = parsed.success ? parsed.data.avoid : [];
   const cat = pickCategory(category);
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = cleanApiKey(process.env.GROQ_API_KEY);
   const isKeyValid =
     apiKey &&
     !apiKey.includes("isi_dengan_kunci") &&
@@ -115,7 +135,7 @@ export async function POST(req: Request) {
 
   // ── AI Generation (Groq) dengan retry + fallback model ──────────────
   if (isKeyValid) {
-    const primaryModel = process.env.GROQ_MODEL || FALLBACK_MODELS[0];
+    const primaryModel = cleanModel(process.env.GROQ_MODEL);
     // Buat daftar model: primary dulu, lalu fallback yang belum ada
     const modelsToTry = [
       primaryModel,
