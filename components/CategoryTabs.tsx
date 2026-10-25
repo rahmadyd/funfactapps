@@ -16,14 +16,6 @@ interface CategoryConfig {
 
 const categories: CategoryConfig[] = [
   {
-    id: "mixed",
-    label: "Semua Topik",
-    icon: "✦",
-    activeClass: "bg-zinc-950 text-white border-zinc-950 shadow-md ring-2 ring-zinc-900/20 scale-[1.03]",
-    inactiveClass: "bg-white text-zinc-700 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50 hover:text-zinc-900 shadow-sm",
-    ariaLabel: "Fakta acak dari semua topik",
-  },
-  {
     id: "python",
     label: "Python",
     icon: "🐍",

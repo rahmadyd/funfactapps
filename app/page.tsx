@@ -11,7 +11,7 @@ import seed from "@/data/seed-facts.json";
 type Source = "ai" | "seed";
 
 export default function HomePage() {
-  const [selectedCategory, setSelectedCategory] = useState<string>("mixed");
+  const [selectedCategory, setSelectedCategory] = useState<string>("python");
   const [currentFact, setCurrentFact] = useState<Fact | null>(null);
   const [source, setSource] = useState<Source>("ai");
   const [isLoading, setIsLoading] = useState(false);
@@ -23,9 +23,12 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsClient(true);
-    // Load initial fact from seed
-    const randomSeedFact = seed[Math.floor(Math.random() * seed.length)] as Fact;
-    setCurrentFact(randomSeedFact);
+    // Load initial fact from seed for default category (python)
+    const pythonSeeds = seed.filter((f) => f.category === "python");
+    const initialFact = (pythonSeeds.length > 0
+      ? pythonSeeds[Math.floor(Math.random() * pythonSeeds.length)]
+      : seed[Math.floor(Math.random() * seed.length)]) as Fact;
+    setCurrentFact(initialFact);
     setViewCount(1);
     setIsRevealed(false);
 
@@ -75,9 +78,7 @@ export default function HomePage() {
         setViewCount((prev) => prev + 1);
       } else {
         // Fallback to seed
-        const pool = selectedCategory === "mixed"
-          ? seed
-          : seed.filter((f) => f.category === selectedCategory);
+        const pool = seed.filter((f) => f.category === selectedCategory);
         const fallbackFact = pool.length > 0
           ? pool[Math.floor(Math.random() * pool.length)]
           : seed[Math.floor(Math.random() * seed.length)];
@@ -87,9 +88,7 @@ export default function HomePage() {
       }
     } catch {
       // Fallback to seed on any error
-      const pool = selectedCategory === "mixed"
-        ? seed
-        : seed.filter((f) => f.category === selectedCategory);
+      const pool = seed.filter((f) => f.category === selectedCategory);
       const fallbackFact = pool.length > 0
         ? pool[Math.floor(Math.random() * pool.length)]
         : seed[Math.floor(Math.random() * seed.length)];
@@ -129,9 +128,7 @@ export default function HomePage() {
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
-    const pool = category === "mixed"
-      ? seed
-      : seed.filter((f) => f.category === category);
+    const pool = seed.filter((f) => f.category === category);
     const nextFact = pool.length > 0
       ? pool[Math.floor(Math.random() * pool.length)]
       : seed[Math.floor(Math.random() * seed.length)];
