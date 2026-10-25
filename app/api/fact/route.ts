@@ -6,12 +6,13 @@ import seed from "@/data/seed-facts.json";
 
 export const maxDuration = 30;
 
-// Daftar model fallback — jika model utama gagal atau deprecated, coba model berikutnya
+// Daftar model fallback — diprioritaskan model yang aktif dan tersedia di akun Groq
 const FALLBACK_MODELS = [
+  "qwen/qwen3.8-27b",
+  "openai/gpt-oss-120b",
+  "openai/gpt-oss-20b",
   "llama-3.3-70b-versatile",
-  "llama-3.1-70b-versatile",
   "llama-3.1-8b-instant",
-  "gemma2-9b-it",
 ];
 
 const ReqSchema = z.object({
@@ -183,10 +184,18 @@ export async function POST(req: Request) {
         // Auto-fix untuk masalah umum sebelum validasi schema
         if (jsonData.howTo && !Array.isArray(jsonData.howTo)) {
           jsonData.howTo = [String(jsonData.howTo)];
+        } else if (!jsonData.howTo || !Array.isArray(jsonData.howTo) || jsonData.howTo.length === 0) {
+          jsonData.howTo = ["Terapkan konsep ini dalam alur kerja atau latihan harian Anda."];
         }
         if (typeof jsonData.title === "string" && jsonData.title.length > 250) {
           jsonData.title = jsonData.title.substring(0, 247) + "...";
         }
+        if (!jsonData.title) jsonData.title = `Fakta Menarik ${cat.toUpperCase()}`;
+        if (!jsonData.body) jsonData.body = "Konsep esensial yang sangat berguna dipahami.";
+        if (!jsonData.example) jsonData.example = "-";
+        if (!jsonData.result) jsonData.result = "-";
+        if (!jsonData.why) jsonData.why = String(jsonData.body || "");
+        if (!jsonData.usage) jsonData.usage = "Dapat diaplikasikan langsung dalam praktik sehari-hari.";
         // Hapus field category dari AI response (kita set manual dari request)
         delete jsonData.category;
 

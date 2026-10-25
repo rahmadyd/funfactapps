@@ -23,21 +23,15 @@ export default function HomePage() {
 
   useEffect(() => {
     setIsClient(true);
-    // Load initial fact from seed for default category (python)
-    const pythonSeeds = seed.filter((f) => f.category === "python");
-    const initialFact = (pythonSeeds.length > 0
-      ? pythonSeeds[Math.floor(Math.random() * pythonSeeds.length)]
-      : seed[Math.floor(Math.random() * seed.length)]) as Fact;
-    setCurrentFact(initialFact);
-    setViewCount(1);
-    setIsRevealed(false);
-
-    // Load favorites
     setFavorites(getFavorites());
+    // Generate AI fact langsung saat pertama kali landing!
+    fetchRandomFact("python");
   }, []);
 
-  const fetchRandomFact = useCallback(async () => {
+  const fetchRandomFact = useCallback(async (targetCategory?: string | unknown) => {
     if (cooldown || isLoading) return;
+
+    const catToFetch = typeof targetCategory === "string" ? targetCategory : selectedCategory;
 
     setIsLoading(true);
     setCooldown(true);
@@ -52,7 +46,7 @@ export default function HomePage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          category: selectedCategory,
+          category: catToFetch,
           avoid: recentTitles,
         }),
       });
@@ -71,14 +65,14 @@ export default function HomePage() {
           );
         }
 
-        if (data.fact.title) {
+        if (data.fact?.title) {
           addToRecent(data.fact.title);
         }
 
         setViewCount((prev) => prev + 1);
       } else {
-        // Fallback to seed
-        const pool = seed.filter((f) => f.category === selectedCategory);
+        // Fallback to seed jika ada error jaringan/server
+        const pool = seed.filter((f) => f.category === catToFetch);
         const fallbackFact = pool.length > 0
           ? pool[Math.floor(Math.random() * pool.length)]
           : seed[Math.floor(Math.random() * seed.length)];
@@ -88,7 +82,7 @@ export default function HomePage() {
       }
     } catch {
       // Fallback to seed on any error
-      const pool = seed.filter((f) => f.category === selectedCategory);
+      const pool = seed.filter((f) => f.category === catToFetch);
       const fallbackFact = pool.length > 0
         ? pool[Math.floor(Math.random() * pool.length)]
         : seed[Math.floor(Math.random() * seed.length)];
@@ -128,13 +122,8 @@ export default function HomePage() {
 
   const handleCategorySelect = (category: string) => {
     setSelectedCategory(category);
-    const pool = seed.filter((f) => f.category === category);
-    const nextFact = pool.length > 0
-      ? pool[Math.floor(Math.random() * pool.length)]
-      : seed[Math.floor(Math.random() * seed.length)];
-    setCurrentFact(nextFact as Fact);
-    setSource("seed");
-    setIsRevealed(false);
+    // Request AI langsung untuk kategori baru yang di-klik pengguna!
+    fetchRandomFact(category);
   };
 
   const handleFavoriteClick = (fact: Fact) => {
@@ -211,7 +200,7 @@ export default function HomePage() {
         {/* Action Controls */}
         <section className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
           <button
-            onClick={fetchRandomFact}
+            onClick={() => fetchRandomFact()}
             disabled={isLoading || cooldown || !isClient}
             className={`group inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-200 min-w-[210px] shadow-sm ${
               cooldown || isLoading
