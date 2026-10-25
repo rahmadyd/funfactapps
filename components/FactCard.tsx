@@ -414,6 +414,19 @@ export default function FactCard({
           <span className="inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded text-zinc-500 bg-zinc-50 border border-zinc-200/60">
             <span>⏱️ 20 dtk</span>
           </span>
+
+          {/* Source Badge: AI vs Seed */}
+          {source === "ai" ? (
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200/60">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              AI Generated
+            </span>
+          ) : (
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200/60">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+              Offline
+            </span>
+          )}
         </div>
 
         {/* Right Actions: Copy & Bookmark */}

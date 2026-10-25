@@ -59,6 +59,15 @@ export default function HomePage() {
         setCurrentFact(data.fact);
         setSource(data.source);
 
+        // Debug logging — cek apakah AI atau seed yang dipakai
+        if (process.env.NODE_ENV === "development" || data.source === "seed") {
+          console.log(
+            `[funfact] source=${data.source}`,
+            data._model ? `model=${data._model}` : "",
+            data._fallbackReason ? `reason=${data._fallbackReason}` : ""
+          );
+        }
+
         if (data.fact.title) {
           addToRecent(data.fact.title);
         }

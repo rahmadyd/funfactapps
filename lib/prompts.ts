@@ -334,6 +334,23 @@ export function getRandomSubtopic(category: Category): string {
 export function buildMessages(category: Category, avoid: string[] = []) {
   const subtopic = getRandomSubtopic(category);
   
+  // Random seed number untuk memaksa AI tidak mengulang pola yang sama
+  const randomSeed = Math.floor(Math.random() * 999999);
+  // Random angle/perspektif supaya AI lebih variatif
+  const angles = [
+    "dari sudut pandang pemula yang baru pertama kali belajar",
+    "dari sudut pandang yang mengejutkan atau kontra-intuitif",
+    "fokus pada kesalahan umum yang sering dilakukan",
+    "dari sudut pandang sejarah atau asal-usul konsep ini",
+    "dari perbandingan dengan konsep serupa",
+    "dari sudut pandang tips praktis yang jarang diketahui",
+    "dari sudut pandang best practice di industri",
+    "fokus pada trik pintar atau shortcut yang berguna",
+    "dari sudut pandang debugging atau troubleshooting",
+    "dari sudut pandang pengalaman nyata di dunia kerja",
+  ];
+  const randomAngle = angles[Math.floor(Math.random() * angles.length)];
+
   const systemPrompt = `Kamu adalah pembuat funfact edukatif untuk orang Indonesia yang sedang belajar santai dan mulai jenuh dengan belajar runut.
 Tulis dalam Bahasa Indonesia yang ringan dan ramah.
 
@@ -343,6 +360,7 @@ Aturan:
 - Jangan mengulang fakta yang ada di daftar "hindari".
 - Jelaskan sederhana, pemula boleh belum paham konsep dasarnya.
 - Selalu sertakan contoh konkret dan penerapannya di dunia nyata.
+- PENTING: Setiap kali diminta, buatlah fakta yang BENAR-BENAR BARU dan BERBEDA. Jangan pernah mengulang pola, contoh, atau struktur yang sama.
 - Balas HANYA dengan JSON valid sesuai skema, tanpa teks lain, tanpa markdown.
 
 Skema JSON:
@@ -383,7 +401,11 @@ Skema JSON:
   
   const userMessage = `Kategori: ${category}
 Subtopik: ${subtopic}
+Sudut pandang: ${randomAngle}
 Hindari fakta dengan judul berikut: ${avoidText}
+Random seed: ${randomSeed}
+
+Buatlah fakta yang unik, segar, dan belum pernah kamu buat sebelumnya.
 
 ${categorySpecificRules[category]}`;
 
