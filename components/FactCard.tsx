@@ -111,7 +111,7 @@ const categoryMeta: Record<Fact["category"], { name: string; tagClass: string; d
   },
 };
 
-// Helper function to render furigana for Japanese text
+// Helper to render furigana for Japanese text
 function renderWithFurigana(text: string): React.ReactNode {
   if (!text.includes('{') || !text.includes('}')) {
     return text;
@@ -166,14 +166,47 @@ function renderWithFurigana(text: string): React.ReactNode {
   return parts.length > 0 ? <>{parts}</> : text;
 }
 
+// Helper to format inline markdown like **bold** and `code`
+function formatInlineMarkdown(text: string): React.ReactNode {
+  if (!text) return null;
+  const parts = text.split(/(\*\*[^*]+\*\*|`[^`]+`)/g);
+  if (parts.length === 1) return text;
+
+  return (
+    <>
+      {parts.map((part, idx) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return (
+            <strong key={idx} className="font-semibold text-zinc-950">
+              {part.slice(2, -2)}
+            </strong>
+          );
+        }
+        if (part.startsWith('`') && part.endsWith('`')) {
+          return (
+            <code
+              key={idx}
+              className="px-1.5 py-0.5 rounded bg-zinc-100 text-zinc-800 font-mono text-xs border border-zinc-200/60"
+            >
+              {part.slice(1, -1)}
+            </code>
+          );
+        }
+        return part;
+      })}
+    </>
+  );
+}
+
 // Helper to bold the first few words of a step for ADHD scannability
 function formatScannableStep(step: string): React.ReactNode {
   if (step.includes(':')) {
-    const [heading, rest] = step.split(':');
+    const [heading, ...restParts] = step.split(':');
+    const rest = restParts.join(':');
     return (
       <>
         <strong className="font-semibold text-zinc-900">{heading}:</strong>
-        {rest}
+        {formatInlineMarkdown(rest)}
       </>
     );
   }
@@ -189,8 +222,238 @@ function formatScannableStep(step: string): React.ReactNode {
   return (
     <>
       <strong className="font-semibold text-zinc-900">{boldPart}</strong>
-      {normalPart}
+      {formatInlineMarkdown(normalPart)}
     </>
+  );
+}
+
+// Structured formatter for Example content
+function renderFormattedExample(
+  example: string,
+  category: Fact["category"],
+  isCodeExample: boolean
+): React.ReactNode {
+  // If it's a code-oriented category, keep it in code block with clean whitespace
+  if (isCodeExample) {
+    return (
+      <pre className="font-mono text-xs sm:text-sm text-zinc-900 overflow-x-auto whitespace-pre-wrap leading-relaxed">
+        {example}
+      </pre>
+    );
+  }
+
+  // Japanese with furigana/romaji separated cleanly
+  if (category === "japanese") {
+    const lines = example.split("\n").map((l) => l.trim()).filter(Boolean);
+    const japaneseLine = lines[0] || example;
+    const romajiLine = lines.slice(1).join("\n");
+    return (
+      <div className="space-y-3 py-1">
+        <div className="text-lg sm:text-2xl font-japanese text-zinc-950 leading-loose">
+          {renderWithFurigana(japaneseLine)}
+        </div>
+        {romajiLine && (
+          <div className="pt-2 border-t border-rose-100/80 flex items-center gap-2">
+            <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-rose-100/80 text-rose-800">
+              Romaji
+            </span>
+            <span className="text-xs sm:text-sm font-mono text-zinc-700">
+              {romajiLine}
+            </span>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // Comparison pattern (❌ vs ✔) - very common in public speaking, confidence, best practices
+  if (example.includes("❌") && example.includes("✔")) {
+    const xIndex = example.indexOf("❌");
+    const vIndex = example.indexOf("✔");
+    if (xIndex < vIndex) {
+      const intro = example.substring(0, xIndex).trim();
+      const avoid = example.substring(xIndex, vIndex).trim();
+      const recommended = example.substring(vIndex).trim();
+
+      const cleanAvoid = avoid.replace(/^❌\s*(Hindari[^:]*:\s*)?/i, "");
+      const cleanRecommended = recommended.replace(/^✔\s*(Script[^:]*:\s*)?/i, "");
+
+      return (
+        <div className="space-y-3">
+          {intro && (
+            <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+              {intro}
+            </div>
+          )}
+          {/* Avoid Card */}
+          <div className="p-3.5 sm:p-4 rounded-xl bg-rose-50/70 border border-rose-200/90 text-rose-950">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 text-[11px] font-bold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-rose-600" />
+              <span>Hindari</span>
+            </div>
+            <div className="text-xs sm:text-sm text-rose-900 leading-relaxed whitespace-pre-wrap font-medium pl-0.5">
+              {formatInlineMarkdown(cleanAvoid)}
+            </div>
+          </div>
+
+          {/* Recommended Script Card */}
+          <div className="p-3.5 sm:p-4 rounded-xl bg-emerald-50/70 border border-emerald-200/90 text-emerald-950 shadow-sm">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold uppercase tracking-wider mb-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+              <span>Script Rekomendasi</span>
+            </div>
+            <div className="text-xs sm:text-sm text-emerald-950 leading-relaxed whitespace-pre-wrap font-semibold pl-0.5">
+              {formatInlineMarkdown(cleanRecommended)}
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
+  // Original vs Paraphrase (TOEFL / IELTS)
+  if (example.includes("Original:") && example.includes("Paraphrase:")) {
+    const origIndex = example.indexOf("Original:");
+    const paraIndex = example.indexOf("Paraphrase:");
+    const intro = example.substring(0, origIndex).trim();
+    const original = example.substring(origIndex, paraIndex).trim().replace(/^Original:\s*/i, "");
+    const paraphrase = example.substring(paraIndex).trim().replace(/^Paraphrase:\s*/i, "");
+
+    return (
+      <div className="space-y-3">
+        {intro && (
+          <div className="text-xs font-semibold text-zinc-500 uppercase tracking-wider">
+            {intro}
+          </div>
+        )}
+        <div className="p-3.5 rounded-xl bg-zinc-50 border border-zinc-200 text-zinc-900">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-zinc-200/80 text-zinc-700 text-[11px] font-bold uppercase tracking-wider mb-2">
+            <span>Kalimat Asli (Original)</span>
+          </div>
+          <div className="text-xs sm:text-sm text-zinc-800 leading-relaxed whitespace-pre-wrap font-medium">
+            {formatInlineMarkdown(original)}
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-amber-50/70 border border-amber-200/90 text-amber-950 shadow-sm">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[11px] font-bold uppercase tracking-wider mb-2">
+            <span>Parafrase Rekomendasi</span>
+          </div>
+          <div className="text-xs sm:text-sm text-amber-950 leading-relaxed whitespace-pre-wrap font-semibold">
+            {formatInlineMarkdown(paraphrase)}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Numbered or Bulleted list
+  const lines = example.split("\n").map((l) => l.trim()).filter(Boolean);
+  const isNumbered = lines.some((l) => /^\d+\.\s+/.test(l));
+  const isBulleted = lines.some((l) => /^[•\-\*]\s+/.test(l));
+
+  if (isNumbered || isBulleted) {
+    const introLines: string[] = [];
+    const items: { mark: string; text: string }[] = [];
+
+    lines.forEach((l) => {
+      const matchNum = l.match(/^(\d+)\.\s+(.*)$/);
+      const matchBullet = l.match(/^[•\-\*]\s+(.*)$/);
+      if (matchNum) {
+        items.push({ mark: matchNum[1], text: matchNum[2] });
+      } else if (matchBullet) {
+        items.push({ mark: "•", text: matchBullet[1] });
+      } else if (items.length === 0) {
+        introLines.push(l);
+      } else {
+        if (items.length > 0) {
+          items[items.length - 1].text += " " + l;
+        }
+      }
+    });
+
+    if (items.length > 0) {
+      return (
+        <div className="space-y-3">
+          {introLines.length > 0 && (
+            <div className="text-xs font-bold text-zinc-700 uppercase tracking-wider mb-1">
+              {introLines.join(" ")}
+            </div>
+          )}
+          <ul className="space-y-2">
+            {items.map((item, idx) => (
+              <li
+                key={idx}
+                className="flex items-start gap-2.5 p-2.5 rounded-lg bg-zinc-50/90 border border-zinc-200/80"
+              >
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-zinc-200 text-zinc-800 text-[11px] font-bold inline-flex items-center justify-center mt-0.5">
+                  {item.mark}
+                </span>
+                <span className="text-xs sm:text-sm text-zinc-800 leading-relaxed font-normal">
+                  {formatInlineMarkdown(item.text)}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+  }
+
+  // Fallback for standard prose text (with comfortable paragraph spacing)
+  return (
+    <div className="text-zinc-800 text-sm sm:text-base leading-relaxed whitespace-pre-line font-normal space-y-2.5">
+      {example.split("\n\n").map((paragraph, pIdx) => (
+        <p key={pIdx}>{formatInlineMarkdown(paragraph)}</p>
+      ))}
+    </div>
+  );
+}
+
+// Structured formatter for Result / Response
+function renderFormattedResult(
+  result: string,
+  isCodeExample: boolean
+): React.ReactNode {
+  // If it's a code category, render inside clear terminal/code block
+  if (isCodeExample) {
+    return (
+      <div className="font-mono text-xs sm:text-sm text-zinc-900 whitespace-pre-wrap leading-relaxed bg-white/95 p-3.5 rounded-lg border border-emerald-200/80 shadow-xs overflow-x-auto">
+        {result}
+      </div>
+    );
+  }
+
+  // For non-code categories: natural readable prose
+  const lines = result.split("\n").map((l) => l.trim()).filter(Boolean);
+
+  // If multiple lines with checkmarks or bullet points
+  if (lines.length > 1) {
+    return (
+      <div className="space-y-2 font-sans bg-white/95 p-3.5 sm:p-4 rounded-xl border border-emerald-200/80 shadow-xs">
+        {lines.map((line, idx) => {
+          const isCheck = line.startsWith("✔") || line.startsWith("✓");
+          const cleanLine = isCheck ? line.replace(/^[✔✓]\s*/, "") : line;
+          return (
+            <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-800">
+              <span className="flex-shrink-0 w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 text-[10px] font-bold inline-flex items-center justify-center mt-0.5">
+                ✓
+              </span>
+              <div className="leading-relaxed font-medium">
+                {formatInlineMarkdown(cleanLine)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  // Single clean paragraph with sans-serif font
+  return (
+    <div className="font-sans text-xs sm:text-sm text-zinc-800 leading-relaxed bg-white/95 p-3.5 sm:p-4 rounded-xl border border-emerald-200/80 shadow-xs font-normal whitespace-pre-line">
+      {formatInlineMarkdown(result)}
+    </div>
   );
 }
 
@@ -474,10 +737,13 @@ export default function FactCard({
       </h2>
 
       {/* Bite-sized TL;DR Callout (Visual Anchor) */}
-      <div className="mb-6 p-3.5 bg-zinc-50 border border-zinc-200/90 rounded-xl flex items-start gap-2.5">
-        <span className="text-amber-500 text-sm mt-0.5 flex-shrink-0">💡</span>
-        <p className="text-zinc-700 text-sm sm:text-base font-medium leading-relaxed">
-          {fact.body}
+      <div className="mb-6 p-4 sm:p-5 bg-gradient-to-br from-amber-50/50 via-zinc-50 to-amber-50/20 border border-amber-200/70 rounded-2xl shadow-xs">
+        <div className="flex items-center gap-2 mb-2 text-xs font-bold uppercase tracking-wider text-amber-900">
+          <span className="flex items-center justify-center w-5 h-5 rounded-full bg-amber-100 text-amber-700 text-xs shadow-xs">💡</span>
+          <span>Penjelasan Singkat</span>
+        </div>
+        <p className="text-zinc-800 text-sm sm:text-base font-normal leading-relaxed whitespace-pre-line pl-0.5">
+          {formatInlineMarkdown(fact.body)}
         </p>
       </div>
 
@@ -500,15 +766,7 @@ export default function FactCard({
 
         {/* Example Content */}
         <div className="p-4 sm:p-5">
-          {isCodeExample ? (
-            <pre className="font-mono text-xs sm:text-sm text-zinc-900 overflow-x-auto whitespace-pre-wrap leading-relaxed">
-              {fact.example}
-            </pre>
-          ) : (
-            <div className="text-zinc-800 text-sm sm:text-base leading-relaxed font-normal">
-              {hasFurigana ? renderWithFurigana(fact.example) : fact.example}
-            </div>
-          )}
+          {renderFormattedExample(fact.example, fact.category, isCodeExample)}
         </div>
 
         {/* Interactive Result Reveal (The Dopamine Hook!) */}
@@ -529,8 +787,8 @@ export default function FactCard({
                   Sembunyikan
                 </button>
               </div>
-              <div className="font-mono text-xs sm:text-sm text-zinc-900 whitespace-pre-wrap leading-relaxed bg-white/80 p-3 rounded-lg border border-emerald-200/60 shadow-sm">
-                {fact.result}
+              <div className="mt-1">
+                {renderFormattedResult(fact.result, isCodeExample)}
               </div>
             </div>
           ) : (
@@ -586,8 +844,8 @@ export default function FactCard({
                 <span className="text-zinc-500">❓</span>
                 <span>{getWhyHeader()}</span>
               </div>
-              <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed">
-                {fact.why}
+              <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed whitespace-pre-line">
+                {formatInlineMarkdown(fact.why)}
               </p>
             </div>
 
@@ -628,7 +886,7 @@ export default function FactCard({
               <span className="font-semibold text-zinc-900 uppercase text-[10px] tracking-wide px-1.5 py-0.5 bg-zinc-100 rounded flex-shrink-0">
                 {getUsageHeader()}
               </span>
-              <span className="leading-relaxed">{fact.usage}</span>
+              <span className="leading-relaxed whitespace-pre-line">{formatInlineMarkdown(fact.usage)}</span>
             </div>
           </div>
         )}

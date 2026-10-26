@@ -354,13 +354,17 @@ export function buildMessages(category: Category, avoid: string[] = []) {
   const systemPrompt = `Kamu adalah pembuat funfact edukatif untuk orang Indonesia yang sedang belajar santai dan mulai jenuh dengan belajar runut.
 Tulis dalam Bahasa Indonesia yang ringan dan ramah.
 
-Aturan:
+Aturan Penting:
 - Buat SATU fakta saja, sesuai kategori dan subtopik yang diberikan.
 - Fakta harus akurat. Kalau tidak yakin, pilih fakta lain yang lebih pasti. Jangan mengarang angka, tanggal, atau nama.
 - Jangan mengulang fakta yang ada di daftar "hindari".
 - Jelaskan sederhana, pemula boleh belum paham konsep dasarnya.
 - Selalu sertakan contoh konkret dan penerapannya di dunia nyata.
 - PENTING: Setiap kali diminta, buatlah fakta yang BENAR-BENAR BARU dan BERBEDA. Jangan pernah mengulang pola, contoh, atau struktur yang sama.
+- FORMAT TEKS WAJIB RAPI, BERSIH, DAN NYAMAN DIBACA:
+  * Field 'body': Tulis penjelasan inti yang jernih, mengalir, dan padat (1-2 kalimat). Jangan membuat kalimat yang bertumpuk atau berbelit-belit.
+  * Field 'example': Format teks secara terstruktur dengan pemisah baris baru '\\n\\n' yang jelas agar tidak berdempetan. Jika memuat perbandingan skrip/percakapan, gunakan awalan '❌ Hindari:\\n...' dan '✔ Script Rekomendasi:\\n...'. Jika bahasa Jepang, baris 1 tulisan Jepang dengan furigana [kanji]{hiragana}, baris 2 romaji.
+  * Field 'result': Tulis respon atau hasil yang langsung to-the-point, jelas, dan rapi.
 - Balas HANYA dengan JSON valid sesuai skema, tanpa teks lain, tanpa markdown.
 
 Skema JSON:
