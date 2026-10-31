@@ -266,6 +266,96 @@ export const publicspeakingSubtopics = [
   "Cara Membelokkan Pertanyaan Menjebak atau Bersifat Menyerang Menggunakan Bridging Technique"
 ];
 
+export const javascriptSubtopics = [
+  "closures dan lexical scope",
+  "hoisting (var, let, const, function)",
+  "Promise, async/await, dan event loop",
+  "destructuring (object \u0026 array)",
+  "arrow functions vs regular functions (this binding)",
+  "Array methods (map, filter, reduce, find)",
+  "template literals dan tagged templates",
+  "optional chaining (?.) dan nullish coalescing (??)",
+  "spread operator dan rest parameters",
+  "TypeScript basics (type, interface, generics)",
+  "modules (import/export, default vs named)",
+  "error handling (try/catch, custom errors)"
+];
+
+export const htmlcssSubtopics = [
+  "semantic HTML (header, main, nav, article, section)",
+  "Flexbox layout (justify-content, align-items, gap)",
+  "CSS Grid (grid-template, fr unit, auto-fit/fill)",
+  "CSS Selectors (specificity, pseudo-classes, pseudo-elements)",
+  "CSS Variables (custom properties \u0026 theming)",
+  "Responsive design (media queries, mobile-first)",
+  "Position (static, relative, absolute, fixed, sticky)",
+  "Box Model (margin, padding, border, box-sizing)",
+  "Accessibility (aria, alt, role, focus management)",
+  "CSS animations dan transitions",
+  "Forms dan validasi HTML5",
+  "BEM naming convention dan CSS architecture"
+];
+
+export const dsaSubtopics = [
+  "Big-O Notation (time \u0026 space complexity)",
+  "Array vs Linked List (trade-offs)",
+  "Stack dan Queue (LIFO vs FIFO)",
+  "Hash Table (collision handling, load factor)",
+  "Binary Search (sorted array, O(log n))",
+  "Sorting algorithms (quicksort, mergesort, insertion sort)",
+  "Binary Tree dan BST (traversal: inorder, preorder, postorder)",
+  "Recursion dan Dynamic Programming dasar",
+  "Graph basics (BFS, DFS, adjacency list vs matrix)",
+  "Two Pointer dan Sliding Window technique",
+  "Heap dan Priority Queue",
+  "Greedy algorithms vs brute force"
+];
+
+export const networkingSubtopics = [
+  "HTTP methods (GET, POST, PUT, DELETE, PATCH)",
+  "HTTP status codes (2xx, 3xx, 4xx, 5xx)",
+  "TCP vs UDP (reliable vs fast)",
+  "DNS resolution (domain to IP)",
+  "HTTPS dan SSL/TLS handshake",
+  "CORS (Cross-Origin Resource Sharing)",
+  "WebSocket vs HTTP (real-time communication)",
+  "CDN (Content Delivery Network) dan caching",
+  "REST vs GraphQL vs gRPC",
+  "OSI Model 7 layer (simplified)",
+  "Load Balancer dan Reverse Proxy",
+  "Cookie vs Session vs Token (autentikasi)"
+];
+
+export const restapiSubtopics = [
+  "RESTful design principles (resource-based URLs)",
+  "JWT (JSON Web Token) authentication flow",
+  "OAuth 2.0 (authorization code, implicit, client credentials)",
+  "API versioning strategies (URL vs header)",
+  "Rate limiting dan throttling",
+  "Pagination (offset vs cursor-based)",
+  "HATEOAS dan API discoverability",
+  "Request/Response headers penting (Content-Type, Authorization)",
+  "Error handling di API (structured error responses)",
+  "API security (HTTPS, input validation, CORS)",
+  "Webhook vs Polling",
+  "OpenAPI / Swagger documentation"
+];
+
+export const testingSubtopics = [
+  "Unit testing vs Integration testing vs E2E testing",
+  "Test-Driven Development (TDD) cycle (Red-Green-Refactor)",
+  "Mocking, Stubbing, dan Spying",
+  "Code coverage (line, branch, statement)",
+  "Jest basics (describe, it, expect, beforeEach)",
+  "Testing async code (Promise, async/await)",
+  "Snapshot testing untuk UI components",
+  "Testing best practices (AAA pattern: Arrange-Act-Assert)",
+  "Cypress / Playwright untuk E2E testing",
+  "Test doubles dan dependency injection",
+  "Testing API endpoints (supertest, MSW)",
+  "Regression testing dan CI integration"
+];
+
 export const confidenceSubtopics = [
   "Cara Mematikan Demam Panggung & Jantung Berdebar dalam 30 Detik (Metode Physiological Sigh)",
   "Cara Menghancurkan Rasa Minder saat Duduk di Meja Rapat Berisi Orang-Orang Berpengaruh",
@@ -328,6 +418,18 @@ export function getRandomSubtopic(category: Category): string {
       return publicspeakingSubtopics[Math.floor(Math.random() * publicspeakingSubtopics.length)];
     case "confidence":
       return confidenceSubtopics[Math.floor(Math.random() * confidenceSubtopics.length)];
+    case "javascript":
+      return javascriptSubtopics[Math.floor(Math.random() * javascriptSubtopics.length)];
+    case "htmlcss":
+      return htmlcssSubtopics[Math.floor(Math.random() * htmlcssSubtopics.length)];
+    case "dsa":
+      return dsaSubtopics[Math.floor(Math.random() * dsaSubtopics.length)];
+    case "networking":
+      return networkingSubtopics[Math.floor(Math.random() * networkingSubtopics.length)];
+    case "restapi":
+      return restapiSubtopics[Math.floor(Math.random() * restapiSubtopics.length)];
+    case "testing":
+      return testingSubtopics[Math.floor(Math.random() * testingSubtopics.length)];
   }
 }
 
@@ -398,7 +500,13 @@ Skema JSON:
     docker: "example berisi potongan Dockerfile atau perintah Docker CLI ringkas (maks 5-6 baris). result berisi output build, eksekusi container, atau hasil optimasi image. Fokus pada efisiensi container dan isolasi aplikasi.",
     tailwind: "example berisi markup HTML/JSX dengan class utility Tailwind yang ringkas dan elegan (maks 5-6 baris). result berisi visualisasi styling atau efek class yang dihasilkan. Tunjukkan trik utility classes yang bersih.",
     publicspeaking: "FOKUS TOTAL pada PANDUAN PRAKTIK & CARA BISA JAGO berbicara di depan umum serta diplomatis ke orang penting (atasan, stakeholder, klien, audiens). BUKAN sekadar trivia atau teori! title harus berupa 'Cara/Trik Praktis...' yang solutif. body berisi formula strategi psikologis/komunikasinya. example WAJIB berisi SCRIPT KATA-DEMI-KATA (word-for-word script): tampilkan perbandingan jelas antara apa yang salah/hindari (❌ Hindari) vs kalimat persis yang elegan, berwibawa & diplomatis untuk diucapkan (✔ Script Diplomatis). result berisi respon positif atau dampak psikologis dari lawan bicara saat mendengar script tersebut. why menjelaskan alasan psikologis kenapa kalimat itu meluluhkan lawan bicara. howTo berisi 3-4 langkah latihan harian konkret (actionable drills) agar lidah dan otak terlatih spontan. usage berisi skenario kritis kapan trik ini harus dikeluarkan. SELALU sertakan quote komunikasi dari tokoh negosiasi/komunikasi terkemuka di field 'quote'.",
-    confidence: "FOKUS TOTAL pada LATIHAN FISIK & MENTAL AGAR BENAR-BENAR PERCAYA DIRI dan berani tampil di depan siapa saja. BUKAN sekadar motivasi kosong! title harus berupa panduan latihan aksi ('Cara Melatih/Menghilangkan...'). body berisi penjelasan singkat mekanisme psikologis tubuh/otak. example berisi latihan aksi fisik/mental konkret yang bisa dicoba detik ini juga (misal pola napas, postur tubuh, resonansi vokal, atau kalimat afirmasi internal). result berisi sensasi fisik dan dampak mental yang langsung terasa setelah latihan. why menjelaskan mekanisme neurobiologis/psikologisnya. howTo berisi 3-4 langkah aksi latihan harian terukur. usage berisi situasi kritis kapan teknik ini wajib dipraktikkan. SELALU sertakan quote ketegaran/keberanian di field 'quote'."
+    confidence: "FOKUS TOTAL pada LATIHAN FISIK & MENTAL AGAR BENAR-BENAR PERCAYA DIRI dan berani tampil di depan siapa saja. BUKAN sekadar motivasi kosong! title harus berupa panduan latihan aksi ('Cara Melatih/Menghilangkan...'). body berisi penjelasan singkat mekanisme psikologis tubuh/otak. example berisi latihan aksi fisik/mental konkret yang bisa dicoba detik ini juga (misal pola napas, postur tubuh, resonansi vokal, atau kalimat afirmasi internal). result berisi sensasi fisik dan dampak mental yang langsung terasa setelah latihan. why menjelaskan mekanisme neurobiologis/psikologisnya. howTo berisi 3-4 langkah aksi latihan harian terukur. usage berisi situasi kritis kapan teknik ini wajib dipraktikkan. SELALU sertakan quote ketegaran/keberanian di field 'quote'.",
+    javascript: "example berisi kode JavaScript/TypeScript pendek (maks 6 baris) yang bersih dan bisa dijalankan. result berisi output console atau perilaku kode. Fokus pada konsep esensial JS/TS yang sering membingungkan pemula.",
+    htmlcss: "example berisi markup HTML dan/atau CSS pendek (maks 6 baris) yang mendemonstrasikan konsep. result berisi efek visual atau perilaku layout yang dihasilkan. Fokus pada layout, semantik, dan aksesibilitas.",
+    dsa: "example berisi pseudocode atau kode sederhana (maks 6 baris) yang menunjukkan algoritma/struktur data. result berisi output atau penjelasan kompleksitas waktu/ruang. Jelaskan dengan analogi dunia nyata.",
+    networking: "example berisi contoh request/response, header, atau diagram alur sederhana. result berisi penjelasan apa yang terjadi di balik layar. Fokus pada konsep praktis yang relevan untuk web developer.",
+    restapi: "example berisi contoh endpoint, request body, atau konfigurasi autentikasi pendek. result berisi response atau efek dari konfigurasi tersebut. Fokus pada best practice API design dan keamanan.",
+    testing: "example berisi kode test pendek (maks 6 baris) menggunakan Jest atau framework testing umum. result berisi output test (pass/fail) dan penjelasan. Fokus pada pola testing praktis.",
   };
 
   const avoidText = avoid.length > 0 ? avoid.join("; ") : "tidak ada";

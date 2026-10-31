@@ -6,7 +6,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Fun Fact Acak - Belajar Santai',
-  description: 'Fakta acak tentang Python, TOEFL, Desain Grafis, dan Bahasa Jepang untuk belajar santai',
+  description: 'Fakta acak tentang Python, JavaScript, HTML/CSS, DSA, Networking, REST API, Testing, dan lebih banyak lagi untuk belajar santai',
+  icons: {
+    icon: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
@@ -15,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="id" className="scroll-smooth">
+    <html lang="id" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
         {children}
       </body>

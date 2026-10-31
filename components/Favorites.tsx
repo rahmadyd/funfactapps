@@ -10,7 +10,7 @@ interface FavoritesProps {
   onFavoritesUpdate: () => void;
 }
 
-const categoryDotColor: Record<Fact["category"], string> = {
+const categoryDotColor: Record<string, string> = {
   python: "bg-indigo-500",
   toefl: "bg-amber-500",
   design: "bg-purple-500",
@@ -30,9 +30,15 @@ const categoryDotColor: Record<Fact["category"], string> = {
   tailwind: "bg-teal-500",
   publicspeaking: "bg-sky-600",
   confidence: "bg-rose-500",
+  javascript: "bg-yellow-500",
+  htmlcss: "bg-orange-500",
+  dsa: "bg-fuchsia-500",
+  networking: "bg-sky-500",
+  restapi: "bg-lime-600",
+  testing: "bg-pink-500",
 };
 
-const categoryNames: Record<Fact["category"], string> = {
+const categoryNames: Record<string, string> = {
   python: "Python",
   toefl: "TOEFL",
   design: "Desain",
@@ -52,6 +58,12 @@ const categoryNames: Record<Fact["category"], string> = {
   tailwind: "Tailwind",
   publicspeaking: "Public Speaking",
   confidence: "Percaya Diri",
+  javascript: "JS/TS",
+  htmlcss: "HTML/CSS",
+  dsa: "DSA",
+  networking: "Network",
+  restapi: "REST API",
+  testing: "Testing",
 };
 
 export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdate }: FavoritesProps) {
@@ -72,17 +84,17 @@ export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdat
   };
 
   return (
-    <section className="mt-16 max-w-3xl mx-auto pt-8 border-t border-zinc-200/80">
+    <section className="mt-16 max-w-3xl mx-auto pt-8 border-t border-zinc-200/80 dark:border-zinc-700">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-2">
-          <h3 className="text-base font-semibold text-zinc-900 tracking-tight">
+          <h3 className="text-base font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">
             Fakta Tersimpan
           </h3>
-          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-600 border border-zinc-200">
+          <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700">
             {favorites.length}
           </span>
         </div>
-        <p className="text-xs text-zinc-400">
+        <p className="text-xs text-zinc-400 dark:text-zinc-500">
           Klik kartu untuk meninjau kembali
         </p>
       </div>
@@ -92,10 +104,10 @@ export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdat
           <div
             key={fact.title}
             onClick={() => onFavoriteClick(fact)}
-            className="group cursor-pointer p-4 rounded-xl border border-zinc-200 bg-white hover:border-zinc-300 hover:shadow-sm transition-all duration-200 relative"
+            className="group cursor-pointer p-4 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-sm transition-all duration-200 relative"
           >
             <div className="flex justify-between items-center mb-2.5">
-              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-600 bg-zinc-50 border border-zinc-200/80 px-2 py-0.5 rounded">
+              <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200/80 dark:border-zinc-700 px-2 py-0.5 rounded">
                 <span className={`w-1.5 h-1.5 rounded-full ${categoryDotColor[fact.category] || "bg-zinc-400"}`} />
                 {categoryNames[fact.category] || fact.category}
               </span>
@@ -112,10 +124,10 @@ export default function Favorites({ favorites, onFavoriteClick, onFavoritesUpdat
               </button>
             </div>
 
-            <h4 className="font-semibold text-sm text-zinc-900 line-clamp-1 mb-1 group-hover:text-zinc-700 transition-colors">
+            <h4 className="font-semibold text-sm text-zinc-900 dark:text-zinc-100 line-clamp-1 mb-1 group-hover:text-zinc-700 dark:group-hover:text-zinc-300 transition-colors">
               {fact.title}
             </h4>
-            <p className="text-xs text-zinc-500 line-clamp-2 leading-relaxed">
+            <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">
               {fact.body}
             </p>
           </div>

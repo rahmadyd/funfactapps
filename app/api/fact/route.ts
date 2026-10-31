@@ -117,6 +117,18 @@ export async function POST(req: Request) {
         rawCat === "self-confidence"
       )
         (bodyJson as Record<string, unknown>).category = "confidence";
+      if (rawCat === "js" || rawCat === "typescript" || rawCat === "ts" || rawCat === "js/ts")
+        (bodyJson as Record<string, unknown>).category = "javascript";
+      if (rawCat === "html" || rawCat === "css" || rawCat === "html/css" || rawCat === "html-css")
+        (bodyJson as Record<string, unknown>).category = "htmlcss";
+      if (rawCat === "algorithms" || rawCat === "data-structures" || rawCat === "algo")
+        (bodyJson as Record<string, unknown>).category = "dsa";
+      if (rawCat === "http" || rawCat === "network" || rawCat === "networking-http")
+        (bodyJson as Record<string, unknown>).category = "networking";
+      if (rawCat === "rest" || rawCat === "api" || rawCat === "rest-api" || rawCat === "auth")
+        (bodyJson as Record<string, unknown>).category = "restapi";
+      if (rawCat === "test" || rawCat === "unit-test" || rawCat === "tdd")
+        (bodyJson as Record<string, unknown>).category = "testing";
     }
   } catch {
     bodyJson = {};

@@ -3,7 +3,9 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  /* ── Light Theme (default) ─────────────────────────── */
+  :root,
+  .theme-light {
     --bg-page: #ffffff;
     --text-primary: #09090b;
     --text-secondary: #52525b;
@@ -12,18 +14,34 @@
     --card-surface: #ffffff;
   }
 
+  /* ── Cream Theme ───────────────────────────────────── */
+  .theme-cream {
+    --bg-page: #f6f3ee;
+    --text-primary: #2f3338;
+    --text-secondary: #52525b;
+    --text-muted: #71717a;
+    --border-subtle: #e0dbd3;
+    --card-surface: #fffdf9;
+  }
+
+  /* ── Dark Soft Theme ───────────────────────────────── */
+  .theme-dark {
+    --bg-page: #171717;
+    --text-primary: #e4e4e7;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --border-subtle: #27272a;
+    --card-surface: #1c1c1e;
+  }
+
   html {
     font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #ffffff;
-    color: #09090b;
   }
 
   body {
-    background-color: #ffffff;
-    color: #09090b;
     min-height: 100vh;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Roboto, sans-serif;
   }
@@ -32,20 +50,37 @@
     box-sizing: border-box;
   }
 
+  /* ── Reduced Motion ────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
-    * {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
   }
 }
 
 @layer utilities {
+  /* Theme-aware background */
+  .bg-page {
+    background-color: var(--bg-page);
+  }
+
+  .text-page {
+    color: var(--text-primary);
+  }
+
   /* Subtle dot grid for clean paper-like texture */
   .bg-dot-grid {
     background-image: radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
     background-size: 20px 20px;
+  }
+
+  .dark .bg-dot-grid {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   }
 
   .card-shadow {
@@ -54,6 +89,14 @@
 
   .card-shadow-hover {
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 20px 30px -10px rgba(0, 0, 0, 0.06);
+  }
+
+  .dark .card-shadow {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .dark .card-shadow-hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 20px 30px -10px rgba(0, 0, 0, 0.4);
   }
 }
 
@@ -81,7 +124,7 @@
   font-family: "Hiragino Mincho Pro", "MS Mincho", serif;
 }
 
-/* Animations */
+/* Animations — will be disabled by reduced-motion */
 @keyframes fadeInSlide {
   from {
     opacity: 0;
@@ -118,6 +161,11 @@
   color: #09090b;
 }
 
+.dark ::selection {
+  background-color: #3f3f46;
+  color: #fafafa;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -135,4 +183,12 @@
 
 ::-webkit-scrollbar-thumb:hover {
   background: #a1a1aa;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #52525b;
 }

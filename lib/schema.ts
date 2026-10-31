@@ -20,6 +20,13 @@ export const CATEGORIES = [
   "tailwind",
   "publicspeaking",
   "confidence",
+  // Fase 1 — Software Engineering
+  "javascript",
+  "htmlcss",
+  "dsa",
+  "networking",
+  "restapi",
+  "testing",
 ] as const;
 
 export const FactSchema = z.object({
